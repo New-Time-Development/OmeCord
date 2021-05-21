@@ -3,7 +3,7 @@
 </p>
 
 # OmeCord
-Copyright (c) 2020 - 2021 by OmeCord to present. All rights reserved
+Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
 
 ## Features
   - This Discordbot has the same features as Ome.tv! You can talk to other
