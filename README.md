@@ -24,6 +24,7 @@ Copyright (c) 2020 - 2021 by OmeCord to present. All rights reserved
   - Slow mode is deactivated and no cooldown
   - Personalised Connection Message
   - Early access to beta functions
+    -  You can get Premium here: [Click here](https://www.patreon.com/omecord/creators)
 
 ## Partners
   - Our partner is Eftron. This was programmed by the same developers as this bot and both are already verified.
