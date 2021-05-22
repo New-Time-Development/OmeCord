@@ -13,9 +13,10 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
     - Coming soon French, Spanish and Russian
   - You can upload files up to 5 Megabyte.
     - Our security systems filter out files with different extensions such as .exe and .msi.
-  - The bot also provides the possibility to write to each other. You can use @ping to mention your partner.
+  - The bot also provides the possibility to write to each other. You can use `@ping` to mention your partner.
     - Here, too, we have various security systems that filter the chat.
   - Our systems are globally synchronised across all systems.
+  - In the future, perhaps a gaming module.  
   
 ## Premium Benefits
   - Prioritised support
