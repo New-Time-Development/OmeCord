@@ -10,6 +10,7 @@ import java.util.Random;
 import de.sage.database.LiteSQL;
 import de.sage.main.Main;
 import de.sage.util.Translations;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -76,6 +77,18 @@ public class OmeCommand extends ListenerAdapter{
 										LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1] +"', '" + args[2] + "', '" + args[3] + "', " + mute + ")");
 										ch.sendMessage(Translations.OmeCmd(lan, "update")).queue();
 									}else {
+										int days = 259200000;
+										long unix = System.currentTimeMillis();
+										long endFree = unix + days;
+										LiteSQL.onUpdate("INSERT INTO premium(userid, time, code, end) VALUES(" + m.getIdLong() + ", " + System.currentTimeMillis() + ", 'NewUser', " + endFree + ")");
+										
+										Main.jda.getTextChannelById(845346722691678278l).sendMessage(new EmbedBuilder()
+					          	  				.setTitle("Codeaktivierung Ome.tv")
+					          	  				.setDescription("Der User " + m.getAsMention() + "** / ** " + m.getUser().getAsTag() + "** ist neu und hat 3 Tage gratis premium!")
+					          	  				.setColor(Color.GREEN)
+					          	  				.setFooter("Codeaktivierung")
+					          	  				.build()).queue();
+										
 										LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1] +"', '" + args[2] + "', '" + args[3] + "', 0)");
 										ch.sendMessage(Translations.OmeCmd(lan, "insert")).queue();
 									}
