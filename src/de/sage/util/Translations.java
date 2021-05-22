@@ -48,9 +48,9 @@ public class Translations {
 				}
 		}else if(stat.equalsIgnoreCase("insert")) {
 			if(lan.equalsIgnoreCase("de")) {
-				temp = "Du wurdest erfolgreich registriert. Jetzt kannst du den Bot uneingeschränkt nutzen";
+				temp = "Du wurdest erfolgreich registriert. Jetzt kannst du den Bot uneingeschränkt nutzen. Weil du das erste mal hier bist, bekommst du 3 Tage Premium gratis!";
 				}else if(lan.equalsIgnoreCase("en")) {
-				temp = "You have been successfully registered. Now you can use the bot without restrictions.";
+				temp = "You have been successfully registered. Now you can use the bot without restrictions. Because you are here for the first time, you get 3 days Premium for free!";
 				}
 		}else if(stat.equalsIgnoreCase("update")) {
 			if(lan.equalsIgnoreCase("de")) {
