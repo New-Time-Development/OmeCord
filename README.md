@@ -28,7 +28,7 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
     -  You can get Premium here: [Click here](https://www.patreon.com/omecord/creators)
 
 ## Partners
-  - Our partner is Eftron. This was programmed by the same developers as this bot and both are already verified.
+  - Our partner is Eftron. This was programmed by the same developers as this bot and Eftron 24/7 is already verified.
 
 ## Terms of Service and Privacy policy
 In our bot, the [ToS](https://github.com/New-Time-Development/OmeCord/blob/docs/tos/terms.md) and [Privacy](https://github.com/New-Time-Development/OmeCord/blob/docs/privacy/privacy.md) created by us . Every user is must  accept them! (You accept the Terms of Service and the Privacy policy automatically when you use the bot)
