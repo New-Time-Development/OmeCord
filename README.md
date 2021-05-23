@@ -30,6 +30,9 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
 ## Partners
   - Our partner is Eftron. This was programmed by the same developers as this bot and both are already verified.
 
+## ToS and Privacy
+In our bot, the [ToS](https://github.com/New-Time-Development/OmeCord/blob/docs/tos/terms.md) and [Privacy](https://github.com/New-Time-Development/OmeCord/blob/docs/privacy/privacy.md) created by us . Every user is must  accept them!
+
 ## Third Party Licenses
 OmeCord relies on the following projects:
   
