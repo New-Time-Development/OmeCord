@@ -1,6 +1,6 @@
 **Terms of Service**
 
-As soon as you use the bot or its functions, you are obliged to accept the terms of use and to adhere to them. In case of violation, the team reserves the right to mute or ban you!
+As soon as you use the bot or its functions, you are obliged to accept the terms of use and to adhere to them. In case of violation, the team reserves the right to mute or ban you! In the event of an unacceptable action that does not clearly violate data privacy guidelines or terms of use, moderators, content managers or administrators are permitted to prevent such actions after clear warning. (Right to issue instructions)
 
 ## Communication
 
@@ -25,3 +25,11 @@ The Bot Team may  mute or block the account of any user at any time and without 
 ## Premium Accounts
 
 Premium can be purchased through Pateron. If you buy, the team will be notified and will send you a code as soon as possible. You may be removed from the Premium status at any time if you violate the guidelines. We do not have to pay any compensation. In case of invalid code or too long waiting time please open a support ticket in our [Discord](https://discord.gg/zEwGEJUPRC).
+
+## Privacy 
+
+In our bot, the [privacy policy](https://github.com/New-Time-Development/OmeCord/blob/docs/privacy/privacy.md) applies to every user 
+
+**Ignorance does not protect from punishment in any case**
+
+*We reserve the right to change the ToS and Privacy  at any time. Each user agrees to the changes by using the bot!*
