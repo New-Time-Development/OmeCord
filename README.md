@@ -21,7 +21,7 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
 ## Premium Benefits
   - Prioritised support
   - Also better audio quality(The best audio quality the server can use)
-  - More file upload (Up to 15MB (only possible if you have Nitro)
+  - More file upload (Up to 15MB (only possible if you have Nitro))
   - Slow mode is deactivated and no cooldown
   - Personalised Connection Message
   - Early access to beta functions
