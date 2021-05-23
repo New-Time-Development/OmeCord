@@ -63,12 +63,15 @@ public class Shutdown extends ListenerAdapter{
 				
 				ch.sendMessage("Der Bot fährt runter!").queue();
 				
+				Main.shutdown();
+				
 				Timer shutT = new Timer();
 				shutT.schedule(new TimerTask() {
 					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
+						
 						
 						shutT.cancel();
 						Main.jda.shutdown();
