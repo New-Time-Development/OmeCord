@@ -1,6 +1,8 @@
 package com.newtime.main;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.logging.Logger;
@@ -44,7 +46,11 @@ import com.newtime.system.security.UserJoin;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
@@ -125,7 +131,7 @@ public class Main {
 		builder.addEventListeners(new UserJoin());
 		
 	    //Set Owners
-	    OwnerIds.add(678260187454242826l);
+	    OwnerIds.add(401059500972441600l);
 	    OwnerIds.add(660887621169446964l);
 	    
 	   //Only Debug Commands
@@ -142,7 +148,54 @@ public class Main {
 			System.out.println("-----\nOme.tv Bot hat einen Fehler \n-----\n\n");
 			e.printStackTrace();
 		}	
+	    
+	    
+	    start();
+	    
+	   // Scanners.scanners();
 	}
 	
-
+	public static void shutdown() {
+		for(Guild guilds : OnOmeChannelJoin.activeGuilds) {
+			for(Member members : guilds.getMembers()) {
+				try {
+					VoiceChannel voiceChannel = members.getVoiceState().getChannel();
+					if(OnOmeChannelJoin.omechannels.containsKey(voiceChannel.getIdLong())) {
+						guilds.kickVoiceMember(members).queue();
+						OnOmeChannelJoin.omechannels.remove(voiceChannel.getIdLong(), OnOmeChannelJoin.omechannels.get(voiceChannel.getIdLong()));
+						ResultSet set = LiteSQL.onQuery("SELECT * FROM guilds WHERE guildid = " + guilds.getIdLong());							
+						
+							if(set.next()) {
+								long channelid = set.getLong("channelid");
+								
+								VoiceChannel setupCh = Main.jda.getVoiceChannelById(channelid);
+								setupCh.getManager().putPermissionOverride(guilds.getPublicRole(), null, EnumSet.of(Permission.VOICE_CONNECT)).queue();
+							}
+					}
+				}catch(Exception e) {
+					
+				}
+			}
+		}
+	}
+	
+	public static void start() {
+		for(Guild guilds : Main.jda.getGuilds()) {
+			ResultSet set = LiteSQL.onQuery("SELECT * FROM guilds WHERE guildid = " + guilds.getIdLong());							
+			
+			try {
+				if(set.next()) {
+					long channelid = set.getLong("channelid");
+					
+					VoiceChannel setupCh = Main.jda.getVoiceChannelById(channelid);
+					setupCh.getManager().putPermissionOverride(guilds.getPublicRole(), null, null).queue();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+		}
+		
+	
 }
