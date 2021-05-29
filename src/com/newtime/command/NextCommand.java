@@ -83,25 +83,30 @@ public class NextCommand extends ListenerAdapter {
 							TextChannel ch2 = OnOmeChannelJoin.omechannels
 									.get(m2.getVoiceState().getChannel().getIdLong());
 							// Chat zeuegs
-							Queue.discordnnectChats(ch1, ch2);
-							Queue.disconnectFromGuild(g);
-							Queue.disconnectFromGuild(g2);
+							Queue.discordnnectChats(ch1, ch2, m, m2);
+						//	Queue.disconnectFromGuild(g);
+							//Queue.disconnectFromGuild(g2);
 
+
+							ResultSet getTheUserData = LiteSQL
+									.onQuery("SELECT * FROM members WHERE userid = " + m.getIdLong());
+							String lan = getTheUserData.getString("selcLan");
+							String gender = getTheUserData.getString("gen");
+							Queue.addUserToQueue(g, m, lan, gender);
+							
 							if (!Queue.matchUser(g, m)) {
 
-								ResultSet getTheUserData = LiteSQL
-										.onQuery("SELECT * FROM members WHERE userid = " + m.getIdLong());
-								String lan = getTheUserData.getString("selcLan");
-								String gender = getTheUserData.getString("gen");
-								Queue.addUserToQueue(g, m, lan, gender);
 								ch1.sendMessage(Translations.machError(currentLanguage)).queue();
 							}
+							
+							ResultSet getTheUserData1 = LiteSQL
+									.onQuery("SELECT * FROM members WHERE userid = " + m2.getIdLong());
+							String lan1 = getTheUserData1.getString("selcLan");
+							String gender1 = getTheUserData1.getString("gen");
+							Queue.addUserToQueue(g2, m2, lan1, gender1);
+							
 							if (!Queue.matchUser(g2, m2)) {
-								ResultSet getTheUserData = LiteSQL
-										.onQuery("SELECT * FROM members WHERE userid = " + m2.getIdLong());
-								String lan = getTheUserData.getString("selcLan");
-								String gender = getTheUserData.getString("gen");
-								Queue.addUserToQueue(g2, m2, lan, gender);
+								Queue.addUserToQueue(g2, m2, lan1, gender1);
 								ch1.sendMessage(Translations.machError(currentLanguage)).queue();
 							}
 
@@ -122,32 +127,46 @@ public class NextCommand extends ListenerAdapter {
 							TextChannel ch2 = OnOmeChannelJoin.omechannels
 									.get(m2.getVoiceState().getChannel().getIdLong());
 							// Chat zeuegs
-							Queue.discordnnectChats(ch1, ch2);
-							Queue.disconnectFromGuild(g);
-							Queue.disconnectFromGuild(g2);
+							Queue.discordnnectChats(ch1, ch2, m, m2);
+						//	Queue.disconnectFromGuild(g);
+						//	Queue.disconnectFromGuild(g2);
 
+							ResultSet getTheUserData = LiteSQL
+									.onQuery("SELECT * FROM members WHERE userid = " + m.getIdLong());
+							String lan = getTheUserData.getString("selcLan");
+							String gender = getTheUserData.getString("gen");
+							Queue.addUserToQueue(g, m, lan, gender);
+							
 							if (!Queue.matchUser(g, m)) {
 
-								ResultSet getTheUserData = LiteSQL
-										.onQuery("SELECT * FROM members WHERE userid = " + m.getIdLong());
-								String lan = getTheUserData.getString("selcLan");
-								String gender = getTheUserData.getString("gen");
-								Queue.addUserToQueue(g, m, lan, gender);
+								
 								ch1.sendMessage(Translations.machError(currentLanguage)).queue();
 							}
+							
+							ResultSet getTheUserData1 = LiteSQL
+									.onQuery("SELECT * FROM members WHERE userid = " + m2.getIdLong());
+							String lan1 = getTheUserData1.getString("selcLan");
+							String gender1 = getTheUserData1.getString("gen");
+							Queue.addUserToQueue(g2, m2, lan1, gender1);
+							
 							if (!Queue.matchUser(g2, m2)) {
-								ResultSet getTheUserData = LiteSQL
-										.onQuery("SELECT * FROM members WHERE userid = " + m2.getIdLong());
-								String lan = getTheUserData.getString("selcLan");
-								String gender = getTheUserData.getString("gen");
-								Queue.addUserToQueue(g2, m2, lan, gender);
+							
+								Queue.addUserToQueue(g2, m2, lan1, gender1);
 								ch1.sendMessage(Translations.machError(currentLanguage)).queue();
 							}
 
 						} else {
+							ResultSet getTheUserData = LiteSQL
+									.onQuery("SELECT * FROM members WHERE userid = " + m.getIdLong());
+							String lan = getTheUserData.getString("selcLan");
+							String gender = getTheUserData.getString("gen");
+							Queue.addUserToQueue(g, m, lan, gender);
+							if (!Queue.matchUser(g, m)) {
 
-							Queue.matchUser(g, m);
-
+								Queue.addUserToQueue(g, m, lan, gender);
+								ch.sendMessage(Translations.machError(currentLanguage)).queue();
+							}
+						
 						}
 					}
 
