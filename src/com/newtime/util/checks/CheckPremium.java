@@ -25,6 +25,7 @@ public class CheckPremium {
 				System.out.println(unix);
 				if(ending == 0) return false;
 				if(unix >= ending) {
+					LiteSQL.onUpdate("DELETE FROM customJoin WHERE userid = " + m.getIdLong());
 					LiteSQL.onUpdate("DELETE FROM premium WHERE userid = " + m.getIdLong());
 					m.getUser().openPrivateChannel().queue(dm ->{
 						
