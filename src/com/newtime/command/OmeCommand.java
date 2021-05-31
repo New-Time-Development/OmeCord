@@ -75,7 +75,7 @@ public class OmeCommand extends ListenerAdapter{
 									if(userData.next()) {
 										int mute = userData.getInt("mute");
 										LiteSQL.onUpdate("DELETE FROM members WHERE userid = " + m.getIdLong());
-										LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1] +"', '" + args[2] + "', '" + args[3] + "', " + mute + ")");
+										LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1].toLowerCase() +"', '" + args[2].toLowerCase() + "', '" + args[3].toLowerCase() + "', " + mute + ")");
 										ch.sendMessage(Translations.OmeCmd(lan, "update")).queue();
 									}else {
 										int days = 259200000;
@@ -90,7 +90,7 @@ public class OmeCommand extends ListenerAdapter{
 					          	  				.setFooter("Codeaktivierung")
 					          	  				.build()).queue();
 										
-										LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1] +"', '" + args[2] + "', '" + args[3] + "', 0)");
+										LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1].toLowerCase() +"', '" + args[2].toLowerCase() + "', '" + args[3].toLowerCase() + "', 0)");
 										ch.sendMessage(Translations.OmeCmd(lan, "insert")).queue();
 									}
 								} catch (SQLException e) {
@@ -102,8 +102,32 @@ public class OmeCommand extends ListenerAdapter{
 							ch.sendMessage(Translations.OmeCmd(lan, "gen")).queue();
 					}else 
 						ch.sendMessage(Translations.OmeCmd(lan, "lang")).queue();
-				}else
-					Translations.Fehler("Incorrect useage", ch, lan);
+				}else if(args.length == 1) {
+					try {
+						if(userData.next()){
+							
+							String language = userData.getString("selcLan");
+							String gen = userData.getString("gen");
+							int trans = userData.getInt("ueber");
+							boolean isActive = false;
+							if(trans == 1) {
+								 isActive = true;
+							}
+							ch.sendMessage(new EmbedBuilder()
+									.setTitle("Settings")
+									.setColor(Color.BLUE)
+									.setDescription("Gender: " + gen + "\n Language: " + language + "\n Translations: " + (isActive ? "No" : "Yes"))
+									.build()).queue();
+						}else
+							Translations.Fehler("Not registerd", ch, lan);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+
+					
+				}
 				
 				//DONT CHANGE
 				premium = false;
