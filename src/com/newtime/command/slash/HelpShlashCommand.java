@@ -1,31 +1,38 @@
-package com.newtime.command;
+package com.newtime.command.slash;
 
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import com.newtime.database.LiteSQL;
 import com.newtime.main.Main;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class HelpCommand extends ListenerAdapter{
+/**
+ * @author SageSphinx63920
+ *
+ * Copyright (c) 2019 - 2021 by New Time Development/Sage to present. All rights reserved
+ */
+
+public class HelpShlashCommand extends ListenerAdapter{
 	
-	@Override
-	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		final TextChannel textChannel = event.getChannel();
+	@SuppressWarnings("unused")
+	public void onSlashCommand(SlashCommandEvent event) {
 		
-		final User user = event.getAuthor();
-		if(event.getMessage().getContentRaw().startsWith(Main.prefix + "help")) {
-			String[] args = event.getMessage().getContentDisplay().split(" ");
-			
-			if (args.length == 1) {
+		if(event.getName().equalsIgnoreCase("help")) {
+			if(event.getChannelType().equals(ChannelType.TEXT)) {
+				TextChannel ch = event.getTextChannel();
+				Guild g = event.getGuild();
+				Member m = event.getMember();
+				
 				ResultSet languageSet = LiteSQL.onQuery("SELECT * FROM lang WHERE userid = " + event.getMember().getIdLong());
 				
 				try {
@@ -60,11 +67,11 @@ public class HelpCommand extends ListenerAdapter{
 
 						embedBuilder.setColor(Color.decode("#e05e36"));
 						
-						textChannel.sendMessage(":white_check_mark: **|** You have received a direct message!").complete().delete().queueAfter(5, TimeUnit.SECONDS);
+						event.reply(":white_check_mark: **|** You have received a direct message!").queue();
 						
-						user.openPrivateChannel().queue((privatechannel) -> {
+						m.getUser().openPrivateChannel().queue((privatechannel) -> {
 							privatechannel.sendMessage(embedBuilder.build()).queue(null, failed -> {
-								textChannel.sendMessage(embedBuilder.build()).queue();
+								ch.sendMessage(embedBuilder.build()).queue();
 							});
 						});
 						
@@ -98,11 +105,11 @@ public class HelpCommand extends ListenerAdapter{
 
 						embedBuilder.setColor(Color.decode("#e05e36"));
 						
-						textChannel.sendMessage(":white_check_mark: **|** Du hast eine Direktnachricht erhalten!").complete().delete().queueAfter(5, TimeUnit.SECONDS);
+						event.reply(":white_check_mark: **|** Du hast eine Direktnachricht erhalten!").queue();
 						
-						user.openPrivateChannel().queue((privatechannel) -> {
+						m.getUser().openPrivateChannel().queue((privatechannel) -> {
 							privatechannel.sendMessage(embedBuilder.build()).queue(null, failed -> {
-								textChannel.sendMessage(embedBuilder.build()).queue();
+								ch.sendMessage(embedBuilder.build()).queue();
 							});
 						});
 					}
@@ -110,6 +117,10 @@ public class HelpCommand extends ListenerAdapter{
 					e.printStackTrace();
 				}
 			}
+		
+			
 		}
+		
 	}
+
 }

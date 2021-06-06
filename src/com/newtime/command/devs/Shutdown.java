@@ -2,24 +2,20 @@ package com.newtime.command.devs;
 
 import java.awt.Color;
 import java.sql.ResultSet;
-import java.time.OffsetDateTime;
-import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.newtime.database.LiteSQL;
 import com.newtime.main.Main;
 
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.Button;
 
 public class Shutdown extends ListenerAdapter{
 	
@@ -44,41 +40,7 @@ public class Shutdown extends ListenerAdapter{
 				ResultSet lanRS = LiteSQL.onQuery("SELECT * FROM sprache WHERE userid = " + m.getIdLong());
 				String lan = null;
 			
-				
-				
-				//Hier gehts los
-				TemporalAccessor t = OffsetDateTime.now();
-				for(long userid : Main.OwnerIds) {
-					
-					Main.jda.openPrivateChannelById(userid).queue(dm ->{
-						dm.sendMessage(new EmbedBuilder()
-								.setTimestamp(t)
-								.setDescription("Der Bot wurde runtergefahren!")
-								.setAuthor(Main.jda.getUserById(userid).getAsTag())
-								.setThumbnail(Main.jda.getSelfUser().getAvatarUrl())
-								.setTitle("Bot Shudtown")
-								.build()).queue();
-					});
-				}
-				
-				ch.sendMessage("Der Bot fährt runter!").queue();
-				
-				Main.shutdown();
-				
-				Timer shutT = new Timer();
-				shutT.schedule(new TimerTask() {
-					
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						
-						
-						shutT.cancel();
-						Main.jda.shutdown();
-						System.exit(0);
-					}
-				}, 3000);	
-				
+				ch.sendMessage("Sicher?").setActionRow(Button.danger("Shutdown", "Shutdown")).queue();
 				
 				//DONT CHANGE
 				lan = "en";

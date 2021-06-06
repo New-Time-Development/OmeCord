@@ -23,9 +23,14 @@ public class OmeChannelDelete extends ListenerAdapter{
 		
 		if(Queue.getKeyFromValue(OnOmeChannelJoin.omechannels, e.getChannel()) != null) {
 			System.out.println("abc2");
-			OnOmeChannelJoin.activeGuilds.remove(e.getGuild());
-			OnOmeChannelJoin.omechannels.remove(Queue.getKeyFromValue(OnOmeChannelJoin.omechannels, e.getChannel().getIdLong()), e.getChannel());
-			
+			try {
+				OnOmeChannelJoin.omechannels.remove(Queue.getKeyFromValue(OnOmeChannelJoin.omechannels, e.getChannel().getIdLong()), e.getChannel());
+				OnOmeChannelJoin.activeGuilds.remove(e.getGuild());
+				
+			}catch(Exception e1) {
+				
+			}
+		
 		}
 			
 	

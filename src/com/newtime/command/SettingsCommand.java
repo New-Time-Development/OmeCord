@@ -4,18 +4,23 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import com.newtime.database.LiteSQL;
 import com.newtime.main.Main;
+import com.newtime.util.Translations;
 
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.Button;
 
 /**
  * @author SageSphinx63920
@@ -24,11 +29,13 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  */
 
 
-public class EmptyCommand extends ListenerAdapter{
+public class SettingsCommand extends ListenerAdapter{
+	
+	public static HashMap<Long, Long> messages = new HashMap<>();
 	
 	@SuppressWarnings("unused")
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-		  if (event.getMessage().getContentRaw().startsWith(Main.prefix + "<prefix>")) {
+		  if (event.getMessage().getContentRaw().startsWith(Main.prefix + "settings")) {
 	        	//Angaben
 	        	TextChannel ch = event.getChannel();
 	        	Member m = event.getMember();
@@ -55,10 +62,10 @@ public class EmptyCommand extends ListenerAdapter{
 					e.printStackTrace();
 				}
 				ResultSet premiumRS = LiteSQL.onQuery("SELECT * FROM premium WHERE userid = " + m.getIdLong());
-				boolean premium = false;
+				boolean premium = true;
 				try {
 					if(premiumRS.next()) {
-						premium = true;
+						premium = false;
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -66,8 +73,41 @@ public class EmptyCommand extends ListenerAdapter{
 				}
 				
 				
-				//Hier gehts los
 				
+				ResultSet userData = LiteSQL.onQuery("SELECT * FROM members WHERE userid = " + event.getMember().getIdLong());
+							try {
+								if(userData.next()) {
+									String lang = userData.getString("selcLan");
+									String gender = userData.getString("gen");
+									String trans = userData.getString("ueber");
+									
+									Emoji botLang = null;
+									if(lan.equalsIgnoreCase("de")) {
+										botLang = Emoji.fromUnicode("🇩🇪");
+									}else if(lan.equalsIgnoreCase("en")) {
+										botLang = Emoji.fromUnicode("🇬🇧");
+									}
+									
+									Emoji botsettingsEmote = Emoji.fromUnicode("🌍");
+									Emoji premiumEmote = Emoji.fromUnicode("⭐");
+									
+									ch.sendMessage(new EmbedBuilder()
+											.setTitle("Settings")
+											.setDescription("Here you can edit your settings")
+											.setColor(Color.PINK)
+											.build()).setActionRow(
+													Button.secondary("bot-language", botLang),
+													Button.secondary("bot-settings", botsettingsEmote),
+													Button.secondary("premium-functions", premiumEmote).withDisabled(premium)
+													).queue(message ->{
+														messages.put(m.getIdLong(), message.getIdLong());
+													});
+									
+								}else
+									ch.sendMessage(Translations.database(lan)).queue();
+							}catch(SQLException e) {
+								e.printStackTrace();
+							}
 				
 				
 				//DONT CHANGE

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -69,7 +70,20 @@ public class StartCommand extends ListenerAdapter {
 								.setAuthor("OmeCord Team")
 								.build()).queue();
 						
-						Queue.addUserToQueue(g, m, lan, gender);
+						HashMap<Long, Long> user = new HashMap<>();
+						user.put(g.getIdLong(), m.getIdLong());
+						
+						HashMap<Member, Guild> activeData = new HashMap<>();
+						activeData.put(m, g);
+						
+						if(!Queue.WaitingUsers.containsKey(user) ) {
+							if(!Queue.activeUser.containsKey(activeData) || !Queue.activeUser.containsValue(activeData)) {
+								Queue.addUserToQueue(g, m, lan, gender);
+							}
+							
+						}
+						
+					
 					}
 
 				}

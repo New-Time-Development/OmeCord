@@ -96,9 +96,9 @@ public class ReportCommand extends ListenerAdapter {
 							 g2 = user2.get(m2);
 						}
 
-					 Main.jda.getTextChannelById(840977106196365332l).sendMessage(new EmbedBuilder()
+					 Main.jda.getTextChannelById(845346683994374151l).sendMessage(new EmbedBuilder()
 							 .setTitle("<:peepoban:759536574240391169> Ome.tv Report <:peepoban:759536574240391169>")
-							 .setDescription("Der folgende Report wurde von dem User " + m.getUser().getAsTag() + "/" + m.getAsMention() + " gemeldet: \n \n **" + Übersetzer.übersetzer(argsstring, "de") + "** \n \n *Original: " + argsstring +"* \n \n Connection Data: \n User: **" + m2.getUser().getAsTag() + "** \n Guild: ** " + g2.getName() + "** \n \n *<:haken:759377859365830664> = Report gelöst* \n *<:kreuz:759377868441649172> = Kein Report*  \n")
+							 .setDescription("Der folgende Report wurde von dem User " + m.getUser().getAsTag() + "/" + m.getAsMention() + " gemeldet: \n \n **" + Übersetzer.übersetzer(argsstring, "de") + "** \n \n *Original: " + argsstring +"* \n \n Connection Data: \n User: **" + m2.getUser().getAsTag() + "** \n Guild: ** " + g2.getName() + "** \n \n *<:haken:759377859365830664> = Report gelï¿½st* \n *<:kreuz:759377868441649172> = Kein Report*  \n")
 							 .setColor(Color.YELLOW)
 							 .setAuthor(m.getUser().getName())
 							 .setFooter("User Report", g.getIconUrl())

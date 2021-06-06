@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import com.newtime.beta.Join;
@@ -21,20 +23,36 @@ import com.newtime.command.PingComand;
 import com.newtime.command.PremiumStatus;
 import com.newtime.command.RedeemCommand;
 import com.newtime.command.ReportCommand;
+import com.newtime.command.SettingsCommand;
 import com.newtime.command.Setup;
 import com.newtime.command.StartCommand;
 import com.newtime.command.devs.ChangeCommand;
 import com.newtime.command.devs.CodeGen;
 import com.newtime.command.devs.Mute;
+import com.newtime.command.devs.OnlineCommand;
+import com.newtime.command.devs.PremiumButtonCommand;
 import com.newtime.command.devs.PremiumRemove;
 import com.newtime.command.devs.Shutdown;
+import com.newtime.command.slash.AboutSlahCommand;
+import com.newtime.command.slash.BetaSlashCommand;
+import com.newtime.command.slash.HelpShlashCommand;
+import com.newtime.command.slash.OmeSlashCommand;
+import com.newtime.command.slash.PremiumSlashCommand;
+import com.newtime.command.slash.RedeemSlashCommand;
+import com.newtime.command.slash.SettingsSlashCommand;
 import com.newtime.database.LiteSQL;
 import com.newtime.database.SQLManger;
 import com.newtime.listener.AutoJoinRole;
 import com.newtime.listener.LangRegist;
 import com.newtime.listener.OnOmeChannelJoin;
 import com.newtime.listener.StartUp;
-import com.newtime.listener.VoiceStatsUpdate;
+import com.newtime.listener.buttons.BetaButton;
+import com.newtime.listener.buttons.EchoTestButton;
+import com.newtime.listener.buttons.NextButton;
+import com.newtime.listener.buttons.PremiumButton;
+import com.newtime.listener.buttons.SettingsButton;
+import com.newtime.listener.buttons.ShutdownButton;
+import com.newtime.listener.buttons.StopButton;
 import com.newtime.system.ChattingListener;
 import com.newtime.system.security.CatecoryDelete;
 import com.newtime.system.security.CatecoryPermUpdate;
@@ -51,7 +69,13 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.interactions.commands.Command.Choice;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import okhttp3.OkHttpClient;
@@ -62,9 +86,9 @@ public class Main {
 	public static JDA jda;
 	public static JDABuilder builder;
 	public static ArrayList<Long> OwnerIds = new ArrayList<Long>();
-	public static String prefix = "!";
+	public static String prefix = "!!";
 	public static long id = 838062574963523644l;
-	public static String footer = "Version 1.0.0 PRE || New-Time-Development";
+	public static String footer = "Version 1.0.1 PRE || New-Time-Development";
 	public static boolean Debug = false;
 	
 	public static void main(String[] args) throws IOException{
@@ -79,20 +103,20 @@ public class Main {
     	Logger.getLogger(OkHttpClient.class.getName()).setLevel(java.util.logging.Level.FINE);
     	
     	//Set Token
-		builder = JDABuilder.createDefault(DONOTOPEN.Token);
+		builder = JDABuilder.createDefault(DONOTOPEN.DevToken);
 
 		//Set Online Stats
-		builder.setActivity(Activity.listening(" ...loading... voices"));
+		builder.setActivity(Activity.listening("...loading..."));
 		builder.setAutoReconnect(true);
 		
-		builder.setStatus(OnlineStatus.DO_NOT_DISTURB);
+		builder.setStatus(OnlineStatus.ONLINE);
 		
 		//Enable Caches
 	    builder.setMemberCachePolicy(MemberCachePolicy.ALL);
 	    
 	    builder.enableCache(EnumSet.allOf(CacheFlag.class));
 	    builder.enableIntents(EnumSet.allOf(GatewayIntent.class));
-
+	    
 	    //Register Events
 	    builder.addEventListeners(new TestCommand());
 	    builder.addEventListeners(new Join());
@@ -100,7 +124,7 @@ public class Main {
 	    builder.addEventListeners(new Test1Comman());
 	    builder.addEventListeners(new StartUp());
 	    builder.addEventListeners(new CodeGen());
-	    builder.addEventListeners(new VoiceStatsUpdate());
+	  //  builder.addEventListeners(new VoiceStatsUpdate());
 	    builder.addEventListeners(new ReportCommand());
 	    builder.addEventListeners(new Setup());
 	    builder.addEventListeners(new OnOmeChannelJoin());
@@ -121,6 +145,9 @@ public class Main {
 		builder.addEventListeners(new ChangeCommand());
 		builder.addEventListeners(new CustomJoin());
 		builder.addEventListeners(new AutoJoinRole());
+		builder.addEventListeners(new OnlineCommand());
+		builder.addEventListeners(new PremiumButtonCommand());
+		builder.addEventListeners(new SettingsCommand());
 		
 		//Securety
 		builder.addEventListeners(new ChannelDeleteDatabase());
@@ -130,6 +157,24 @@ public class Main {
 		builder.addEventListeners(new CatecoryDelete());
 		builder.addEventListeners(new UserJoin());
 		
+		//Slash Command Listener
+		builder.addEventListeners(new AboutSlahCommand());
+    	builder.addEventListeners(new HelpShlashCommand());
+		builder.addEventListeners(new RedeemSlashCommand());
+    	builder.addEventListeners(new OmeSlashCommand());
+		builder.addEventListeners(new SettingsSlashCommand());
+    	builder.addEventListeners(new BetaSlashCommand());
+    	builder.addEventListeners(new PremiumSlashCommand());
+		
+    	//Buttons
+		builder.addEventListeners(new ShutdownButton());
+		builder.addEventListeners(new NextButton());
+		builder.addEventListeners(new StopButton());
+		builder.addEventListeners(new EchoTestButton());
+		builder.addEventListeners(new SettingsButton());
+		builder.addEventListeners(new PremiumButton());
+		builder.addEventListeners(new BetaButton());
+		
 	    //Set Owners
 	    OwnerIds.add(401059500972441600l);
 	    OwnerIds.add(660887621169446964l);
@@ -138,6 +183,7 @@ public class Main {
 	    if(Debug) {
 	    	
 	    }
+
 	    
 	    try {
 	    	//Online
@@ -150,6 +196,37 @@ public class Main {
 		}	
 	    
 	    
+	    //Get Slah Command Action
+	    CommandListUpdateAction clua = jda.updateCommands();
+	    
+	    
+	    //Add Slash Commands
+	    clua.addCommands(new CommandData("about", "Information about the bot & contact")).queue();
+	    clua.addCommands(new CommandData("setup", "Sets up the bot automatically"));
+	    clua.addCommands(new CommandData("joim", "Sets your custom join message || only Premium").addOption(OptionType.STRING, "message", "The custom jojn message", true));
+	    clua.addCommands(new CommandData("next", "Connects you to a new user"));
+	    clua.addCommands(new CommandData("start", " Adds you to the queue"));
+	    clua.addCommands(new CommandData("report", "Repot a user").addOption(OptionType.STRING, "message", "Your report message"));
+	    clua.addCommands(new CommandData("invite", "Sends you the invitation link"));
+	    clua.addCommands(new CommandData("help", "Show you the help menu"));
+	    clua.addCommands(new CommandData("game", "Find a gamer").addOptions(new OptionData(OptionType.STRING, "game", "Your game", true).addChoice("minecraft", "minecraft")).setDefaultEnabled(false));
+	    clua.addCommands(new CommandData("premium", "Shows you all premium features for the bot").addSubcommands(new SubcommandData("functions", "lists the premium functions")).addSubcommands(new SubcommandData("status", "Show if you have premium and how long")));
+	    clua.addCommands(new CommandData("redeem", "Activates the premium functions").addOptions(new OptionData(OptionType.STRING, "code", "Your premium code", true)));
+	    clua.addCommands(new CommandData("ome", "Creates a user for you").addOptions(new OptionData(OptionType.STRING, "language", "The language code of your language", true).addChoice("de", "de").addChoice("en", "en").addChoice("es", "es").addChoice("fr", "fr").addChoice("ru", "ru").addChoice("trk", "trk"), new OptionData(OptionType.STRING, "gender", "Your gender", true).addChoice("male", "male").addChoice("female", "female").addChoice("couple", "couple"), new OptionData(OptionType.BOOLEAN, "tranlations", "Yes for automatic translations", true)));
+	    clua.addCommands(new CommandData("eftron", "Show more infos about the eftron bots").addOptions(new OptionData(OptionType.INTEGER, "bot", "Select a bot").addChoices(new Choice("Eftron", "EftronNormal"), new Choice("Eftron 24/7", "Eftron24"))));
+	    clua.addCommands(new CommandData("settings", "You can edit you settings"));
+	    clua.addCommands(new CommandData("language", "Set your bot language").addSubcommands(new SubcommandData("list", "lists the languages")).addSubcommands(new SubcommandData("set", "Set your language").addOptions(new OptionData(OptionType.STRING, "lang", "The language you want", true).addChoice("de", "de").addChoice("en", "en"))));
+	  //  clua.addCommands(new CommandData("language", "Set you bot language").addOptions(new OptionData(OptionType.STRING, "lang", "The language you want", true).addChoice("de", "de").addChoice("en", "en")));
+	    
+	    //Only Debug Slash-Commands
+	    if(Debug) {
+		    clua.addCommands(new CommandData("dev", "Only Debug/Developer Command").setDefaultEnabled(false));
+	    }
+
+	    //Send the Slah Update
+	 clua.queue();
+		
+		//Open voice channel connections and starts the functions
 	    start();
 	    
 	   // Scanners.scanners();
@@ -177,9 +254,24 @@ public class Main {
 				}
 			}
 		}
+		
 	}
 	
 	public static void start() {
+		
+		Timer timer = new Timer(); 
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				
+				Guild omecord = jda.getGuildById(845327767565631559l);
+				omecord.upsertCommand("beta", "Sends you informations about our beta programm").queue();
+				
+			}
+		}, 3000);
+	
+		
 		for(Guild guilds : Main.jda.getGuilds()) {
 			ResultSet set = LiteSQL.onQuery("SELECT * FROM guilds WHERE guildid = " + guilds.getIdLong());							
 			

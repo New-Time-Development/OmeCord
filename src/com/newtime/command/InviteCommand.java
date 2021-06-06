@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.Button;
 
 public class InviteCommand extends ListenerAdapter {
 
@@ -31,14 +32,14 @@ public class InviteCommand extends ListenerAdapter {
 						EmbedBuilder embedBuilder = new EmbedBuilder();
 						
 						embedBuilder.setTitle("OmeCord || Einladung");
-						embedBuilder.setDescription("Du möchtest mich auf deinen Server einladen? Klicke [hier](https://discord.com/api/oauth2/authorize?client_id=838062574963523644&permissions=2268392792&scope=bot%20applications.commands), "
-								+ "um mich auf deinen Server einzuladen!");
+						embedBuilder.setDescription("Du möchtest mich auf deinen Server einladen? Klicke " + "[hier](https://discord.com/api/oauth2/authorize?client_id=838062574963523644&permissions=2268392792&scope=bot%20applications.commands), "
+								+ "um mich auf deinen Server einzuladen!" );
 						
 						embedBuilder.setFooter(Main.footer);
 						embedBuilder.setTimestamp(new Date().toInstant());
 
 						embedBuilder.setColor(Color.decode("#e05e36"));
-						textChannel.sendMessage(embedBuilder.build()).complete().delete().queueAfter(1, TimeUnit.MINUTES);
+						textChannel.sendMessage(embedBuilder.build()).setActionRow(Button.link("https://discord.com/api/oauth2/authorize?client_id=838062574963523644&permissions=2268392792&scope=bot%20applications.commands", "Invite")).complete().delete().queueAfter(1, TimeUnit.MINUTES);
 						
 					} else if(currentLanguage.equals("en")) {
 						EmbedBuilder embedBuilder = new EmbedBuilder();
@@ -52,7 +53,7 @@ public class InviteCommand extends ListenerAdapter {
 
 						embedBuilder.setColor(Color.decode("#e05e36"));
 						
-						textChannel.sendMessage(embedBuilder.build()).complete().delete().queueAfter(1, TimeUnit.MINUTES);					}
+						textChannel.sendMessage(embedBuilder.build()).setActionRow(Button.link("https://discord.com/api/oauth2/authorize?client_id=838062574963523644&permissions=2268392792&scope=bot%20applications.commands", "Invite")).complete().delete().queueAfter(1, TimeUnit.MINUTES);					}
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

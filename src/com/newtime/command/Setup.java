@@ -54,6 +54,9 @@ public class Setup extends ListenerAdapter {
 					e.printStackTrace();
 				}*/
 
+				if(g.getBotRole().hasPermission(EnumSet.of(Permission.MANAGE_CHANNEL))) {
+					
+				}
 				ResultSet set = LiteSQL.onQuery("SELECT * FROM guilds WHERE guildid = " + event.getGuild().getIdLong());
 
 				try {

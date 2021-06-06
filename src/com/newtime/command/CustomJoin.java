@@ -66,7 +66,7 @@ public class CustomJoin extends ListenerAdapter{
 					if(args.length <= 10) {
 						 long totalCharacters = argsstring.chars().filter(ch1 -> ch1 != ' ').count();
 						if(totalCharacters <= 25) {
-							if(argsstring.contains("$user") && argsstring.contains("$server")) {
+							if(argsstring.contains("@user") && argsstring.contains("@server")) {
 								
 								List<String> BAD_WORDS = Arrays.asList("fick", "fuck", "LGBTQ", "LGBTQ+", "nudes", "nude", "hure", "nutte", "huren", "whore", "bastart", "ficke", "ficken", "porno", "porn", "hurensohn", "schlampe", "fotze", "ficken", "Depp", "idiot", "vollidiot", "arschkriecher", "wichser", "wixxer", "mee6", "wixer", "arsch", "arschloch", "drecksau", "trottel", "hackfresse", "dummkopf", "Dreckschwein", "sau", "bitch", "schwachkopf", "pussy", "pu$$y", "ass", "boobs", "titten", "brüste", "Dickhead", "scheide", "vagina");
 			                    
@@ -88,22 +88,18 @@ public class CustomJoin extends ListenerAdapter{
 									
 								}
 
-								System.out.println("sfiojn");
 								//argsstring.replace("_", "");
-								String message = argsstring;
+								argsstring = argsstring.replace("@server", g.getName());
+								argsstring = argsstring.replace("@user", m.getUser().getAsTag());
 								ResultSet haveSet = LiteSQL.onQuery("SELECT * FROM customJoin WHERE userid = " + m.getIdLong());
 								try {
 									if(haveSet.next()) {
-										System.out.println("xyz");
-										LiteSQL.onUpdate("UPDATE customJoin SET mes = '" + message + "'");
-										message.replace("$server", g.getName());
-										message.replace("$user", g.getName());
-										ch.sendMessage("You message is now:** " +  argsstring + "**").queue();
+										
+										LiteSQL.onUpdate("UPDATE customJoin SET mes = '" + argsstring + "'");
+										ch.sendMessage("You message is now: **" +  argsstring + "**").queue();
 									}else {
-										LiteSQL.onUpdate("INSERT INTO customJoin(userid, mes) VALUES(" + m.getIdLong() + ", '" + message + "')");
-										message.replace("$server", g.getName());
-										message.replace("$user", g.getName());
-										ch.sendMessage("You message is now:** " +  argsstring + "**").queue();
+										LiteSQL.onUpdate("INSERT INTO customJoin(userid, mes) VALUES(" + m.getIdLong() + ", '" + argsstring + "')");
+										ch.sendMessage("You message is now: **" +  argsstring + "**").queue();
 									}
 								} catch (SQLException e) {
 									// TODO Auto-generated catch block

@@ -22,7 +22,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class OmeCommand extends ListenerAdapter{
 	
 	private List<String> langs = Arrays.asList("de", "en", "trk", "fr", "es", "ru");
-	private List<String> gender = Arrays.asList("male", "female", "couples", "männlich", "weiblich", "paare");
+	private List<String> gender = Arrays.asList("male", "female", "couples");
 	
 	@SuppressWarnings("unused")
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {

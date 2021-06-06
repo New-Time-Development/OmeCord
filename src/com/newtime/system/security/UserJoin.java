@@ -19,19 +19,29 @@ public class UserJoin extends ListenerAdapter{
 			if(set.next()) {
 				long setup = set.getLong("channelid");
 				long voiceid = e.getChannelJoined().getIdLong();
-				if(e.getChannelLeft() != null) {
-					if(e.getChannelLeft().getIdLong() != setup) {
+				try {
+					//  if (!event.getMember().getUser().isBot()) {
+					if (!e.getMember().getUser().isBot()) {
 						
-						
-						if(OnOmeChannelJoin.omechannels.containsKey(voiceid)){
-							e.getGuild().kickVoiceMember(e.getMember()).queue();
+						if(e.getChannelLeft() != null) {
+							if(e.getChannelLeft().getIdLong() != setup) {
+								
+								
+								if(OnOmeChannelJoin.omechannels.containsKey(voiceid)){
+									e.getGuild().kickVoiceMember(e.getMember()).queue();
+								}
+							}
+						}else {
+							if(OnOmeChannelJoin.omechannels.containsKey(voiceid)){
+								e.getGuild().kickVoiceMember(e.getMember()).queue();
+							}
 						}
 					}
-				}else {
-					if(OnOmeChannelJoin.omechannels.containsKey(voiceid)){
-						e.getGuild().kickVoiceMember(e.getMember()).queue();
-					}
+				}catch(Exception e1) {
+					
 				}
+
+
 				
 			}
 		} catch (SQLException e1) {
