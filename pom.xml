@@ -3,6 +3,21 @@
   <groupId>OmeCord</groupId>
   <artifactId>OmeCord</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <developers>
+  	<developer>
+  	  <id>Sage</id>
+  	  <email>sage.sphinx63920@gmail.com</email>
+  	  <organization>New Time Development</organization>
+  	  <organizationUrl>newtimedevelopment.de</organizationUrl>
+  	  <name>SageSphinx63920</name>
+  	</developer>
+  	<developer>
+  	  <id>verion</id>
+      <name>zVerion</name>
+      <organization>New Time Development</organization>
+  	  <organizationUrl>newtimedevelopment.de</organizationUrl>
+  	</developer>
+  </developers>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -37,11 +52,11 @@
     </repository>
   </repositories>
   <dependencies>
-    <dependency>
-        <groupId>net.dv8tion</groupId>
-        <artifactId>JDA</artifactId>
-        <version>4.2.1_265</version>
-    </dependency> 
+   <dependency>
+    <groupId>net.dv8tion</groupId>
+    <artifactId>JDA</artifactId>
+    <version>4.2.1_269</version>
+	</dependency>
     <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
 	<dependency>
     	<groupId>org.xerial</groupId>
@@ -60,19 +75,19 @@
     <version>5.3.4</version>
   </dependency>
     <dependency>
-			<groupId>com.github.goxr3plus</groupId>
-			<artifactId>java-google-speech-api</artifactId>
-			<version>V2.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm.icu</groupId>
-			<artifactId>icu4j</artifactId>
-			<version>64.2</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
+	<groupId>com.github.goxr3plus</groupId>
+	<artifactId>java-google-speech-api</artifactId>
+	<version>V2.1</version>
+     </dependency>
+     <dependency>
+	<groupId>com.ibm.icu</groupId>
+	<artifactId>icu4j</artifactId>
+	<version>64.2</version>
+     </dependency>
+     <dependency>
+	<groupId>commons-lang</groupId>
+	<artifactId>commons-lang</artifactId>
+	<version>2.6</version>
+     </dependency>
   </dependencies>
 </project>
