@@ -30,6 +30,11 @@
       </plugin>
     </plugins>
   </build>
+  <inceptionYear>2021</inceptionYear>
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
    <repositories>
   <repository>
     <id>dv8tion</id>
@@ -55,7 +60,7 @@
    <dependency>
     <groupId>net.dv8tion</groupId>
     <artifactId>JDA</artifactId>
-    <version>4.2.1_269</version>
+    <version>4.2.1_272</version>
 	</dependency>
     <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
 	<dependency>
@@ -75,19 +80,19 @@
     <version>5.3.4</version>
   </dependency>
     <dependency>
-	<groupId>com.github.goxr3plus</groupId>
-	<artifactId>java-google-speech-api</artifactId>
-	<version>V2.1</version>
-     </dependency>
-     <dependency>
-	<groupId>com.ibm.icu</groupId>
-	<artifactId>icu4j</artifactId>
-	<version>64.2</version>
-     </dependency>
-     <dependency>
-	<groupId>commons-lang</groupId>
-	<artifactId>commons-lang</artifactId>
-	<version>2.6</version>
-     </dependency>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>java-google-speech-api</artifactId>
+			<version>V2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>64.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
   </dependencies>
 </project>
