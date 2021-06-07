@@ -55,7 +55,7 @@ public class PremiumSlashCommand extends ListenerAdapter{
 				e.printStackTrace();
 			}
 			
-			if(event.getSubcommandName().equalsIgnoreCase("list")) {
+			if(event.getSubcommandName().equalsIgnoreCase("functions")) {
 				event.replyEmbeds(new EmbedBuilder()
 						.setTitle("Premium functions")
 						.setColor(Color.BLUE)
