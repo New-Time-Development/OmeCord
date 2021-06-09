@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -35,14 +37,24 @@ import com.newtime.command.devs.PremiumRemove;
 import com.newtime.command.devs.Shutdown;
 import com.newtime.command.slash.AboutSlahCommand;
 import com.newtime.command.slash.BetaSlashCommand;
+import com.newtime.command.slash.DevSlashCommand;
+import com.newtime.command.slash.EftronSlashCommand;
 import com.newtime.command.slash.HelpShlashCommand;
+import com.newtime.command.slash.InviteSlashCommand;
+import com.newtime.command.slash.LanguageSlashCommand;
+import com.newtime.command.slash.NextSlashCommand;
 import com.newtime.command.slash.OmeSlashCommand;
+import com.newtime.command.slash.PingSlashCommand;
 import com.newtime.command.slash.PremiumSlashCommand;
 import com.newtime.command.slash.RedeemSlashCommand;
+import com.newtime.command.slash.ReportSlashCommand;
 import com.newtime.command.slash.SettingsSlashCommand;
+import com.newtime.command.slash.SetupSlashCommand;
+import com.newtime.command.slash.StartSlashCommand;
 import com.newtime.database.LiteSQL;
 import com.newtime.database.SQLManger;
 import com.newtime.listener.AutoJoinRole;
+import com.newtime.listener.GithubListener;
 import com.newtime.listener.LangRegist;
 import com.newtime.listener.OnOmeChannelJoin;
 import com.newtime.listener.StartUp;
@@ -68,12 +80,14 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.interactions.commands.Command.Choice;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
+import net.dv8tion.jda.api.interactions.commands.privileges.CommandPrivilege;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -88,7 +102,7 @@ public class Main {
 	public static ArrayList<Long> OwnerIds = new ArrayList<Long>();
 	public static String prefix = "!!";
 	public static long id = 838062574963523644l;
-	public static String footer = "Version 1.0.1 PRE || New-Time-Development";
+	public static String footer = "Version 1.1.0 PRE || New-Time-Development";
 	public static boolean Debug = false;
 	
 	public static void main(String[] args) throws IOException{
@@ -148,6 +162,7 @@ public class Main {
 		builder.addEventListeners(new OnlineCommand());
 		builder.addEventListeners(new PremiumButtonCommand());
 		builder.addEventListeners(new SettingsCommand());
+		builder.addEventListeners(new GithubListener());
 		
 		//Securety
 		builder.addEventListeners(new ChannelDeleteDatabase());
@@ -165,6 +180,15 @@ public class Main {
 		builder.addEventListeners(new SettingsSlashCommand());
     	builder.addEventListeners(new BetaSlashCommand());
     	builder.addEventListeners(new PremiumSlashCommand());
+		builder.addEventListeners(new SetupSlashCommand());
+    	builder.addEventListeners(new NextSlashCommand());
+		builder.addEventListeners(new InviteSlashCommand());
+    	builder.addEventListeners(new StartSlashCommand());
+		builder.addEventListeners(new ReportSlashCommand());
+    	builder.addEventListeners(new EftronSlashCommand());
+		builder.addEventListeners(new DevSlashCommand());
+		builder.addEventListeners(new PingSlashCommand());
+		builder.addEventListeners(new LanguageSlashCommand());
 		
     	//Buttons
 		builder.addEventListeners(new ShutdownButton());
@@ -203,9 +227,10 @@ public class Main {
 	    //Add Slash Commands
 	    clua.addCommands(new CommandData("about", "Information about the bot & contact")).queue();
 	    clua.addCommands(new CommandData("setup", "Sets up the bot automatically"));
-	    clua.addCommands(new CommandData("joim", "Sets your custom join message || only Premium").addOption(OptionType.STRING, "message", "The custom jojn message", true));
+	    clua.addCommands(new CommandData("join", "Sets your custom join message || only Premium").addOption(OptionType.STRING, "message", "The custom jojn message", true));
 	    clua.addCommands(new CommandData("next", "Connects you to a new user"));
 	    clua.addCommands(new CommandData("start", " Adds you to the queue"));
+	    clua.addCommands(new CommandData("ping", "Show you the bot ping"));
 	    clua.addCommands(new CommandData("report", "Repot a user").addOption(OptionType.STRING, "message", "Your report message"));
 	    clua.addCommands(new CommandData("invite", "Sends you the invitation link"));
 	    clua.addCommands(new CommandData("help", "Show you the help menu"));
@@ -213,18 +238,13 @@ public class Main {
 	    clua.addCommands(new CommandData("premium", "Shows you all premium features for the bot").addSubcommands(new SubcommandData("functions", "lists the premium functions")).addSubcommands(new SubcommandData("status", "Show if you have premium and how long")));
 	    clua.addCommands(new CommandData("redeem", "Activates the premium functions").addOptions(new OptionData(OptionType.STRING, "code", "Your premium code", true)));
 	    clua.addCommands(new CommandData("ome", "Creates a user for you").addOptions(new OptionData(OptionType.STRING, "language", "The language code of your language", true).addChoice("de", "de").addChoice("en", "en").addChoice("es", "es").addChoice("fr", "fr").addChoice("ru", "ru").addChoice("trk", "trk"), new OptionData(OptionType.STRING, "gender", "Your gender", true).addChoice("male", "male").addChoice("female", "female").addChoice("couple", "couple"), new OptionData(OptionType.BOOLEAN, "tranlations", "Yes for automatic translations", true)));
-	    clua.addCommands(new CommandData("eftron", "Show more infos about the eftron bots").addOptions(new OptionData(OptionType.INTEGER, "bot", "Select a bot").addChoices(new Choice("Eftron", "EftronNormal"), new Choice("Eftron 24/7", "Eftron24"))));
+	    clua.addCommands(new CommandData("eftron", "Show more infos about the eftron bots").addOptions(new OptionData(OptionType.STRING, "bot", "Select a bot").addChoices(new Choice("Eftron", "EftronNormal"), new Choice("Eftron 24/7", "Eftron24"))));
 	    clua.addCommands(new CommandData("settings", "You can edit you settings"));
 	    clua.addCommands(new CommandData("language", "Set your bot language").addSubcommands(new SubcommandData("list", "lists the languages")).addSubcommands(new SubcommandData("set", "Set your language").addOptions(new OptionData(OptionType.STRING, "lang", "The language you want", true).addChoice("de", "de").addChoice("en", "en"))));
 	  //  clua.addCommands(new CommandData("language", "Set you bot language").addOptions(new OptionData(OptionType.STRING, "lang", "The language you want", true).addChoice("de", "de").addChoice("en", "en")));
 	    
-	    //Only Debug Slash-Commands
-	    if(Debug) {
-		    clua.addCommands(new CommandData("dev", "Only Debug/Developer Command").setDefaultEnabled(false));
-	    }
-
 	    //Send the Slah Update
-	 clua.queue();
+	    clua.queue();
 		
 		//Open voice channel connections and starts the functions
 	    start();
@@ -268,6 +288,21 @@ public class Main {
 				Guild omecord = jda.getGuildById(845327767565631559l);
 				omecord.upsertCommand("beta", "Sends you informations about our beta programm").queue();
 				
+				//Only Debug Slash-Commands
+			    if(Debug) {
+			    	List<Long> DevGuilds = Arrays.asList(845327767565631559l, 809699466734075904l);
+			    	jda.upsertCommand(new CommandData("dev", "Only Debug/Developer Command")).setDefaultEnabled(false).queue(command ->{
+			    		for(long guildid : DevGuilds) {
+			    			Guild devGuild = jda.getGuildById(guildid);
+			    			for(long id : OwnerIds) {
+				    			User dev = jda.getUserById(id);
+				    			command.updatePrivileges(devGuild, CommandPrivilege.enable(dev)).queue();
+				    		}
+			    		}
+			    		
+			    	});
+				    //clua.addCommands).setDefaultEnabled(false));
+			    }
 			}
 		}, 3000);
 	
