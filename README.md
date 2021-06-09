@@ -12,6 +12,7 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
   - Currently available in 2 languages (German and English) 
     - Coming soon French, Spanish and Russian
   - You can upload files up to 5 Megabyte.
+  - Many / commands and buttons for easy usage
     - Our security systems filter out files with different extensions such as .exe and .msi.
   - The bot also provides the possibility to write to each other. You can use `@ping` to mention your partner.
     - Here, too, we have various security systems that filter the chat.
@@ -40,4 +41,4 @@ OmeCord relies on the following projects:
 | Name | License  |
 |:---|:---|
 | [JDA (Java Discord API)](https://github.com/DV8FromTheWorld/JDA) | [Apache License 2.0](https://github.com/DV8FromTheWorld/JDA/blob/master/LICENSE) |
-| [SQLLite (sqlite-jdbc)](https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc) | [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt ) |
+| [SQLite (sqlite-jdbc)](https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc) | [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt ) |
