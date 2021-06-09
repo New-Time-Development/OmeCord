@@ -19,10 +19,7 @@ public class OmeChannelDelete extends ListenerAdapter{
 	
 	public void onTextChannelDelete(TextChannelDeleteEvent e) {
 		
-		System.out.println("abc1");
-		
 		if(Queue.getKeyFromValue(OnOmeChannelJoin.omechannels, e.getChannel()) != null) {
-			System.out.println("abc2");
 			try {
 				OnOmeChannelJoin.omechannels.remove(Queue.getKeyFromValue(OnOmeChannelJoin.omechannels, e.getChannel().getIdLong()), e.getChannel());
 				OnOmeChannelJoin.activeGuilds.remove(e.getGuild());
