@@ -2,7 +2,7 @@
   <img width="460" height="300" src="https://cdn.discordapp.com/attachments/839533117479845988/844237955362717706/logo_vertical_1.png">
 </p>
 
-# OmeCord || 1.0 PRE
+# OmeCord || 1.1.0 PRE
 Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
 
 ## Features
@@ -12,8 +12,8 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
   - Currently available in 2 languages (German and English) 
     - Coming soon French, Spanish and Russian
   - You can upload files up to 5 Megabyte.
-  - Many / commands and buttons for easy usage
     - Our security systems filter out files with different extensions such as .exe and .msi.
+  - Many / commands and buttons for easy usage
   - The bot also provides the possibility to write to each other. You can use `@ping` to mention your partner.
     - Here, too, we have various security systems that filter the chat.
   - Our systems are globally synchronised across all systems.
