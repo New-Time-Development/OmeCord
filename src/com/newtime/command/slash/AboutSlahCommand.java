@@ -55,8 +55,8 @@ public class AboutSlahCommand extends ListenerAdapter{
 						EmbedBuilder deBuilder = new EmbedBuilder();
 
 						deBuilder.setTitle("OmeCord || About");
-						deBuilder.setDescription("OmeCord weist **�hnliche** Funktionen wie Ome.tv auf.\r\n"
-								+ "Es ist m�glich mit anderen Leuten zu **kommunizieren**, **ohne** zusammen\r\n"
+						deBuilder.setDescription("OmeCord weist **ähnliche** Funktionen wie Ome.tv auf.\r\n"
+								+ "Es ist möglich mit anderen Leuten zu **kommunizieren**, **ohne** zusammen\r\n"
 								+ "in einem **gemeinsamen** Discord-Server zu sein oder **befreundet** zu sein.");
 
 						deBuilder.addField("N�tzliche Links: ",
