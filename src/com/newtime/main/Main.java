@@ -3,12 +3,7 @@ package com.newtime.main;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.logging.Logger;
 
 import com.newtime.beta.Join;
@@ -65,6 +60,7 @@ import com.newtime.listener.buttons.PremiumButton;
 import com.newtime.listener.buttons.SettingsButton;
 import com.newtime.listener.buttons.ShutdownButton;
 import com.newtime.listener.buttons.StopButton;
+import com.newtime.logger.Logs;
 import com.newtime.system.ChattingListener;
 import com.newtime.system.security.CatecoryDelete;
 import com.newtime.system.security.CatecoryPermUpdate;
@@ -100,12 +96,21 @@ public class Main {
 	public static JDA jda;
 	public static JDABuilder builder;
 	public static ArrayList<Long> OwnerIds = new ArrayList<Long>();
-	public static String prefix = "!!";
+	public static String prefix = "!";
 	public static long id = 838062574963523644l;
 	public static String footer = "Version 1.1.0 PRE || New-Time-Development";
 	public static boolean Debug = false;
 	
 	public static void main(String[] args) throws IOException{
+		
+		/*if(args.length == 0) {
+			 Debug = false;
+		}else{
+			if(args[0].equalsIgnoreCase("-debug")) {
+				 Debug = true;
+			}
+		}*/
+		
 		//Debug
 		 Debug = true;
 		 
@@ -117,7 +122,7 @@ public class Main {
     	Logger.getLogger(OkHttpClient.class.getName()).setLevel(java.util.logging.Level.FINE);
     	
     	//Set Token
-		builder = JDABuilder.createDefault(DONOTOPEN.DevToken);
+		builder = JDABuilder.createDefault(DONOTOPEN.Token);
 
 		//Set Online Stats
 		builder.setActivity(Activity.listening("...loading..."));
@@ -241,14 +246,15 @@ public class Main {
 	    clua.addCommands(new CommandData("eftron", "Show more infos about the eftron bots").addOptions(new OptionData(OptionType.STRING, "bot", "Select a bot").addChoices(new Choice("Eftron", "EftronNormal"), new Choice("Eftron 24/7", "Eftron24"))));
 	    clua.addCommands(new CommandData("settings", "You can edit you settings"));
 	    clua.addCommands(new CommandData("language", "Set your bot language").addSubcommands(new SubcommandData("list", "lists the languages")).addSubcommands(new SubcommandData("set", "Set your language").addOptions(new OptionData(OptionType.STRING, "lang", "The language you want", true).addChoice("de", "de").addChoice("en", "en"))));
-	  //  clua.addCommands(new CommandData("language", "Set you bot language").addOptions(new OptionData(OptionType.STRING, "lang", "The language you want", true).addChoice("de", "de").addChoice("en", "en")));
-	    
+	 
 	    //Send the Slah Update
 	    clua.queue();
 		
 		//Open voice channel connections and starts the functions
 	    start();
 	    
+	    
+	    Logs.createFiles();
 	   // Scanners.scanners();
 	}
 	
@@ -301,7 +307,6 @@ public class Main {
 			    		}
 			    		
 			    	});
-				    //clua.addCommands).setDefaultEnabled(false));
 			    }
 			}
 		}, 3000);
@@ -318,7 +323,6 @@ public class Main {
 					setupCh.getManager().putPermissionOverride(guilds.getPublicRole(), null, null).queue();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
