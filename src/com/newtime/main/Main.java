@@ -62,6 +62,7 @@ import com.newtime.listener.buttons.ShutdownButton;
 import com.newtime.listener.buttons.StopButton;
 import com.newtime.logger.Logs;
 import com.newtime.system.ChattingListener;
+import com.newtime.system.UpdateStatusEmbed;
 import com.newtime.system.security.CatecoryDelete;
 import com.newtime.system.security.CatecoryPermUpdate;
 import com.newtime.system.security.ChannelDeleteDatabase;
@@ -253,9 +254,12 @@ public class Main {
 		//Open voice channel connections and starts the functions
 	    start();
 	    
+	    //Start message update
+	  
 	    
 	    Logs.createFiles();
 	   // Scanners.scanners();
+	    
 	}
 	
 	public static void shutdown() {
@@ -293,6 +297,9 @@ public class Main {
 				
 				Guild omecord = jda.getGuildById(845327767565631559l);
 				omecord.upsertCommand("beta", "Sends you informations about our beta programm").queue();
+
+				//Start update message
+				 UpdateStatusEmbed.start();
 				
 				//Only Debug Slash-Commands
 			    if(Debug) {
