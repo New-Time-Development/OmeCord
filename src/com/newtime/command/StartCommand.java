@@ -63,7 +63,7 @@ public class StartCommand extends ListenerAdapter {
 							return;
 						}
 						
-						ch.sendMessage(new EmbedBuilder()
+						ch.sendMessageEmbeds(new EmbedBuilder()
 								.setTitle("Queue")
 								.setDescription(Translations.Start(lan))
 								.setColor(Color.ORANGE)

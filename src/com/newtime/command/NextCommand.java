@@ -140,7 +140,7 @@ public class NextCommand extends ListenerAdapter {
 							if (!Queue.matchUser(g, m)) {
 
 								
-								ch1.sendMessage(Translations.machError(currentLanguage)).queue();
+								ch.sendMessage(Translations.machError(currentLanguage)).queue();
 							}
 							
 							ResultSet getTheUserData1 = LiteSQL

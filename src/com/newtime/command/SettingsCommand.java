@@ -91,7 +91,7 @@ public class SettingsCommand extends ListenerAdapter{
 									Emoji botsettingsEmote = Emoji.fromUnicode("🌍");
 									Emoji premiumEmote = Emoji.fromUnicode("⭐");
 									
-									ch.sendMessage(new EmbedBuilder()
+									ch.sendMessageEmbeds(new EmbedBuilder()
 											.setTitle("Settings")
 											.setDescription("Here you can edit your settings")
 											.setColor(Color.PINK)

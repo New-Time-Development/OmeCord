@@ -44,9 +44,9 @@ public class RedeemSlashCommand extends ListenerAdapter{
 			          	  		if(canEnd == 0) {
 			          	  		event.reply("Your code is valid. You actived premium for your account. Use !premium to check out your new functions").queue();
 			          	  		LiteSQL.onUpdate("INSERT INTO premium(userid, time, code, end) VALUES(" + m.getIdLong() + ", " + System.currentTimeMillis() + ", '" + code + "', 0)");
-			          	  		Main.jda.getTextChannelById(845346722691678278l).sendMessage(new EmbedBuilder()
+			          	  		Main.jda.getTextChannelById(845346722691678278l).sendMessageEmbeds(new EmbedBuilder()
 			          	  				.setTitle("Codeaktivierung Ome.tv")
-			          	  				.setDescription("Der Code ||" + code + "|| von " + m.getAsMention() + "** / ** " + m.getUser().getAsTag() + "** engelöst.")
+			          	  				.setDescription("Der Code ||" + code + "|| von " + m.getAsMention() + "** / ** " + m.getUser().getAsTag() + "** engelï¿½st.")
 			          	  				.setColor(Color.GREEN)
 			          	  				.setFooter("Codeaktivierung")
 			          	  				.build()).queue();
@@ -59,9 +59,9 @@ public class RedeemSlashCommand extends ListenerAdapter{
 			          	String formattedDate = sdf.format(time);
 			          		event.reply("Your code is valid. You actived premium for your account. Use !premium to check out your new functions. Premium ends at: " + formattedDate+ " (MEZ)").queue();
 			          	  		LiteSQL.onUpdate("INSERT INTO premium(userid, time, code, end) VALUES(" + m.getIdLong() + ", " + System.currentTimeMillis() + ", '" + code + "', " + canEnd + ")");
-			          	  		Main.jda.getTextChannelById(845346722691678278l).sendMessage(new EmbedBuilder()
+			          	  		Main.jda.getTextChannelById(845346722691678278l).sendMessageEmbeds(new EmbedBuilder()
 			          	  				.setTitle("Codeaktivierung Ome.tv")
-			          	  				.setDescription("Der Code ||" + code + "|| von " + m.getAsMention() + "** / ** " + m.getUser().getAsTag() + "** engelöst.")
+			          	  				.setDescription("Der Code ||" + code + "|| von " + m.getAsMention() + "** / ** " + m.getUser().getAsTag() + "** engelï¿½st.")
 			          	  				.setColor(Color.GREEN)
 			          	  				.setFooter("Codeaktivierung")
 			          	  				.build()).queue();

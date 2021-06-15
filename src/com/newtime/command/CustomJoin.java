@@ -68,14 +68,14 @@ public class CustomJoin extends ListenerAdapter{
 						if(totalCharacters <= 25) {
 							if(argsstring.contains("@user") && argsstring.contains("@server")) {
 								
-								List<String> BAD_WORDS = Arrays.asList("fick", "fuck", "LGBTQ", "LGBTQ+", "nudes", "nude", "hure", "nutte", "huren", "whore", "bastart", "ficke", "ficken", "porno", "porn", "hurensohn", "schlampe", "fotze", "ficken", "Depp", "idiot", "vollidiot", "arschkriecher", "wichser", "wixxer", "mee6", "wixer", "arsch", "arschloch", "drecksau", "trottel", "hackfresse", "dummkopf", "Dreckschwein", "sau", "bitch", "schwachkopf", "pussy", "pu$$y", "ass", "boobs", "titten", "brüste", "Dickhead", "scheide", "vagina");
+								List<String> BAD_WORDS = Arrays.asList("fick", "fuck", "LGBTQ", "LGBTQ+", "nudes", "nude", "hure", "nutte", "huren", "whore", "bastart", "ficke", "ficken", "porno", "porn", "hurensohn", "schlampe", "fotze", "ficken", "Depp", "idiot", "vollidiot", "arschkriecher", "wichser", "wixxer", "mee6", "wixer", "arsch", "arschloch", "drecksau", "trottel", "hackfresse", "dummkopf", "Dreckschwein", "sau", "bitch", "schwachkopf", "pussy", "pu$$y", "ass", "boobs", "titten", "brï¿½ste", "Dickhead", "scheide", "vagina");
 			                    
 								try {
 									for (int i = 0; i < args.length; i++) {
 				                        for (int j = 0; j < BAD_WORDS.size(); j++) {
 				                            if(BAD_WORDS.contains(args[j].toLowerCase())) {
 				                                event.getMessage().addReaction(":dnd:759536079010398239").queue();
-				                                Main.jda.getTextChannelById(845404663297212466l).sendMessage(new EmbedBuilder()
+				                                Main.jda.getTextChannelById(845404663297212466l).sendMessageEmbeds(new EmbedBuilder()
 				                                		.setTitle("BadWord")
 				                                		.setColor(Color.decode("#aa873d"))
 				                                		.setDescription("Der User **" + event.getMember().getAsMention() + "** / **" + event.getAuthor().getAsTag() + "** \n hat in der folgenden Custom Join Message ein BadWord genutzt: \n ||" + event.getMessage().getContentRaw() + "||")
@@ -89,16 +89,19 @@ public class CustomJoin extends ListenerAdapter{
 								}
 
 								//argsstring.replace("_", "");
-								argsstring = argsstring.replace("@server", g.getName());
-								argsstring = argsstring.replace("@user", m.getUser().getAsTag());
+							
 								ResultSet haveSet = LiteSQL.onQuery("SELECT * FROM customJoin WHERE userid = " + m.getIdLong());
 								try {
 									if(haveSet.next()) {
 										
 										LiteSQL.onUpdate("UPDATE customJoin SET mes = '" + argsstring + "'");
+										argsstring = argsstring.replace("@server", g.getName());
+										argsstring = argsstring.replace("@user", m.getUser().getAsTag());
 										ch.sendMessage("You message is now: **" +  argsstring + "**").queue();
 									}else {
 										LiteSQL.onUpdate("INSERT INTO customJoin(userid, mes) VALUES(" + m.getIdLong() + ", '" + argsstring + "')");
+										argsstring = argsstring.replace("@server", g.getName());
+										argsstring = argsstring.replace("@user", m.getUser().getAsTag());
 										ch.sendMessage("You message is now: **" +  argsstring + "**").queue();
 									}
 								} catch (SQLException e) {
@@ -112,7 +115,7 @@ public class CustomJoin extends ListenerAdapter{
 					}else
 						ch.sendMessage("You can only use up to 10 words").queue();
 				}else
-					Translations.onlyPre(lan);
+					ch.sendMessage(Translations.onlyPre(lan)).queue();
 				
 				
 				//DONT CHANGE

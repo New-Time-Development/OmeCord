@@ -50,21 +50,21 @@ public class CodeGen extends ListenerAdapter {
           		 ResultSet set = LiteSQL.onQuery("SELECT * FROM codes WHERE code = '" + code +"'");
           		  try {
 					if(set.next()) {
-						  ch.sendMessage("Ok du hast es geschafft. Ein code gibt es doppelt. Ein mal applaus für dich! :) Machs einfach nochmal. Es generieren immer neue Codes").queue();
+						  ch.sendMessage("Ok du hast es geschafft. Ein code gibt es doppelt. Ein mal applaus fï¿½r dich! :) Machs einfach nochmal. Es generieren immer neue Codes").queue();
 					  }else {
 						  if(length >= 1) {
 							  if(args[1].equalsIgnoreCase("0")) {
 				          		  LiteSQL.onUpdate("INSERT INTO codes(userid, time, code, end) VALUES(" + m.getIdLong() + ", " + System.currentTimeMillis() + ", '" + code + "', 0)");
 				          		  ch.sendMessage("DU haben eine neue DM bidde schauen du nach").queue();
 				          		  m.getUser().openPrivateChannel().queue(dm ->{
-				          			  dm.sendMessage(new EmbedBuilder()
+				          			  dm.sendMessageEmbeds(new EmbedBuilder()
 				          					  .setColor(Color.BLUE)
 				          					  .setTitle("Ome.tv Premium Code")
 				          					  .setFooter("VORSICHTIG MEIN FREUND")
-				          					  .setDescription("Bitte zeige diesen Code NIEMALS in einem Stream usw. \n Er schaltet einmalig für einen User alle Premium Funktionen frei. \n Mit ihm ist vorsichtig um zu gehen! \n Hier ist der Code: ||" + code + "||")
+				          					  .setDescription("Bitte zeige diesen Code NIEMALS in einem Stream usw. \n Er schaltet einmalig fï¿½r einen User alle Premium Funktionen frei. \n Mit ihm ist vorsichtig um zu gehen! \n Hier ist der Code: ||" + code + "||")
 				          					  .build()).queue();
 				          		  });
-				          		  Main.jda.getTextChannelById(845346722691678278l).sendMessage(new EmbedBuilder()
+				          		  Main.jda.getTextChannelById(845346722691678278l).sendMessageEmbeds(new EmbedBuilder()
 				          				  .setDescription("Hier ein Code von " + m.getAsMention() + "! Bitte NIEMALS im Stream usw. zeigen! \n Code: ||" + code + "||")
 				          				  .setColor(Color.orange)
 				          				  .setTitle("Ome.tv Premium Code")
@@ -80,14 +80,14 @@ public class CodeGen extends ListenerAdapter {
 						          		  LiteSQL.onUpdate("INSERT INTO codes(userid, time, code, end) VALUES(" + m.getIdLong() + ", " + System.currentTimeMillis() + ", '" + code + "', " + date.getTime() + ")");
 						          		  ch.sendMessage("DU haben eine neue DM bidde schauen du nach").queue();
 						          		  m.getUser().openPrivateChannel().queue(dm ->{
-						          			  dm.sendMessage(new EmbedBuilder()
+						          			  dm.sendMessageEmbeds(new EmbedBuilder()
 						          					  .setColor(Color.CYAN)
 						          					  .setTitle("Temp | Ome.tv Premium Code")
 						          					  .setFooter("VORSICHTIG MEIN FREUND")
-						          					  .setDescription("Bitte zeige diesen Code NIEMALS in einem Stream usw. \n Er schaltet einmalig für einen User alle Premium Funktionen frei. \n Mit ihm ist vorsichtig um zu gehen! \n Hier ist der Code: ||" + code + "||" + "\n Ende: " + argsstring)
+						          					  .setDescription("Bitte zeige diesen Code NIEMALS in einem Stream usw. \n Er schaltet einmalig fï¿½r einen User alle Premium Funktionen frei. \n Mit ihm ist vorsichtig um zu gehen! \n Hier ist der Code: ||" + code + "||" + "\n Ende: " + argsstring)
 						          					  .build()).queue();
 						          		  });
-						          		  Main.jda.getTextChannelById(845346722691678278l).sendMessage(new EmbedBuilder()
+						          		  Main.jda.getTextChannelById(845346722691678278l).sendMessageEmbeds(new EmbedBuilder()
 						          				  .setDescription("Hier ein Temp-Code von " + m.getAsMention() + "! Bitte NIEMALS im Stream usw. zeigen! \n Code: ||" + code + "||" + "\n Ende: " + argsstring)
 						          				  .setColor(Color.YELLOW)
 						          				  .setTitle("Ome.tv Premium Code")

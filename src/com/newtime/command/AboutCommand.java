@@ -46,17 +46,17 @@ public class AboutCommand extends ListenerAdapter {
 
 						enBuilder.setColor(Color.decode("#e05e36"));
 
-						textChannel.sendMessage(enBuilder.build()).queue();
+						textChannel.sendMessageEmbeds(enBuilder.build()).queue();
 
 					} else if (currentLanguage.equals("de")) {
 						EmbedBuilder deBuilder = new EmbedBuilder();
 
 						deBuilder.setTitle("OmeCord || About");
-						deBuilder.setDescription("OmeCord weist **ähnliche** Funktionen wie Ome.tv auf.\r\n"
-								+ "Es ist möglich mit anderen Leuten zu **kommunizieren**, **ohne** zusammen\r\n"
+						deBuilder.setDescription("OmeCord weist **ï¿½hnliche** Funktionen wie Ome.tv auf.\r\n"
+								+ "Es ist mï¿½glich mit anderen Leuten zu **kommunizieren**, **ohne** zusammen\r\n"
 								+ "in einem **gemeinsamen** Discord-Server zu sein oder **befreundet** zu sein.");
 
-						deBuilder.addField("Nützliche Links: ",
+						deBuilder.addField("Nï¿½tzliche Links: ",
 								"- Support Server [(Klick)](https://discord.gg/zEwGEJUPRC)\r\n"
 										+ "- Github Link [(Klick)](https://github.com/orgs/New-Time-Development/)\r\n"
 										+ "- Lade mich zu **deinem** Server ein [(Klick)](https://discord.com/api/oauth2/authorize?client_id=838062574963523644&permissions=2268392792&scope=bot%20applications.commands)\r\n"
@@ -68,7 +68,7 @@ public class AboutCommand extends ListenerAdapter {
 
 						deBuilder.setColor(Color.decode("#e05e36"));
 
-						textChannel.sendMessage(deBuilder.build()).queue();
+						textChannel.sendMessageEmbeds(deBuilder.build()).queue();
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();

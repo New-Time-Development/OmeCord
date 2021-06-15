@@ -82,7 +82,7 @@ public class ReportSlashCommand extends ListenerAdapter{
 							 g2 = user2.get(m2);
 						}
 
-					 Main.jda.getTextChannelById(845346683994374151l).sendMessage(new EmbedBuilder()
+					 Main.jda.getTextChannelById(845346683994374151l).sendMessageEmbeds(new EmbedBuilder()
 							 .setTitle("<:peepoban:759536574240391169> Ome.tv Report <:peepoban:759536574240391169>")
 							 .setDescription("Der folgende Report wurde von dem User " + m.getUser().getAsTag() + "/" + m.getAsMention() + " gemeldet: \n \n **" + Übersetzer.übersetzer(message, "de") + "** \n \n *Original: " + message +"* \n \n Connection Data: \n User: **" + m2.getUser().getAsTag() + "** \n Guild: ** " + g2.getName() + "** \n \n *<:haken:759377859365830664> = Report gel�st* \n *<:kreuz:759377868441649172> = Kein Report*  \n")
 							 .setColor(Color.YELLOW)

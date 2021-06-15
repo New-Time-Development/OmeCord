@@ -34,24 +34,24 @@ public class HelpCommand extends ListenerAdapter{
 						EmbedBuilder embedBuilder = new EmbedBuilder();
 						
 						embedBuilder.setTitle("OmeCord || Helpmenu");
-						embedBuilder.addField(":postal_horn: Important Commands:", "`!help` » Show you this help\r\n"
-								+ "`!about` » Information about the bot & contact\r\n"
-								+ "`!invite` » Sends you the invitation link.\r\n"
-								+ "`!setup` » Sets up the bot automatically.\r\n"
-								+ "`!ome <language> <gender> <yes, no>` » Creates a user for you *(Yes for automatic translation)*.\r\n"
-								+ "`!premium` » Shows you all premium features for the bot.\r\n"
-								+ "`!join <message (@user + @server)` » Sets your custom join message *only Premium*"
+						embedBuilder.addField(":postal_horn: Important Commands:", "`!help` ï¿½ Show you this help\r\n"
+								+ "`!about` ï¿½ Information about the bot & contact\r\n"
+								+ "`!invite` ï¿½ Sends you the invitation link.\r\n"
+								+ "`!setup` ï¿½ Sets up the bot automatically.\r\n"
+								+ "`!ome <language> <gender> <yes, no>` ï¿½ Creates a user for you *(Yes for automatic translation)*.\r\n"
+								+ "`!premium` ï¿½ Shows you all premium features for the bot.\r\n"
+								+ "`!join <message (@user + @server)` ï¿½ Sets your custom join message *only Premium*"
 								, false);
 						
-						embedBuilder.addField(":flag_white: Language Commands:", "`!language` » Shows you your current language\r\n"
-								+ "`!language list` » Shows you all available languages\r\n"
+						embedBuilder.addField(":flag_white: Language Commands:", "`!language` ï¿½ Shows you your current language\r\n"
+								+ "`!language list` ï¿½ Shows you all available languages\r\n"
 								+ "that are available for selection\r\n"
-								+ "`!language <language>` » Change your language", false);
+								+ "`!language <language>` ï¿½ Change your language", false);
 						
-						embedBuilder.addField(":loud_sound: General Commands: ", "`!start` » Adds you to the queue\r\n"
-								+ "`!next` » Connects you to a new user *(Adapted to your \r\n"
+						embedBuilder.addField(":loud_sound: General Commands: ", "`!start` ï¿½ Adds you to the queue\r\n"
+								+ "`!next` ï¿½ Connects you to a new user *(Adapted to your \r\n"
 								+ "(Adjusted to your settings.)*\r\n"
-								+ "`!report <message...>` » Reports a user\r\n", false);
+								+ "`!report <message...>` ï¿½ Reports a user\r\n", false);
 
 						embedBuilder.setFooter(Main.footer);
 						embedBuilder.setTimestamp(new Date().toInstant());
@@ -63,8 +63,8 @@ public class HelpCommand extends ListenerAdapter{
 						textChannel.sendMessage(":white_check_mark: **|** You have received a direct message!").complete().delete().queueAfter(5, TimeUnit.SECONDS);
 						
 						user.openPrivateChannel().queue((privatechannel) -> {
-							privatechannel.sendMessage(embedBuilder.build()).queue(null, failed -> {
-								textChannel.sendMessage(embedBuilder.build()).queue();
+							privatechannel.sendMessageEmbeds(embedBuilder.build()).queue(null, failed -> {
+								textChannel.sendMessageEmbeds(embedBuilder.build()).queue();
 							});
 						});
 						
@@ -72,24 +72,24 @@ public class HelpCommand extends ListenerAdapter{
 						EmbedBuilder embedBuilder = new EmbedBuilder();
 						
 						embedBuilder.setTitle("OmeCord || Hilfestellung");
-						embedBuilder.addField(":postal_horn: Wichtige Kommandos:", "`!help` » Zeigt dir diese Hilfestellung\r\n"
-								+ "`!about` » Informationen zu dem Bot & Kontakt\r\n"
-								+ "`!invite` » Sendet dir den Einladungslink.\r\n"
-								+ "`!setup` » Richtet den Bot automatisch ein.\r\n"
-								+ "`!ome <Sprache> <Geschlecht> <Yes, No>` » Erstellt dir einen Nutzer *(Ja für automatische Übersetzung)*\r\n"
-								+ "`!premium` » Zeigt dir alle Premiumfunktionen für den Bot \r\n"
-								+ "`!join <Nachricht (@user + @server)` » Setzt deine Custom Join Nachricht *only Premium*"
+						embedBuilder.addField(":postal_horn: Wichtige Kommandos:", "`!help` ï¿½ Zeigt dir diese Hilfestellung\r\n"
+								+ "`!about` ï¿½ Informationen zu dem Bot & Kontakt\r\n"
+								+ "`!invite` ï¿½ Sendet dir den Einladungslink.\r\n"
+								+ "`!setup` ï¿½ Richtet den Bot automatisch ein.\r\n"
+								+ "`!ome <Sprache> <Geschlecht> <Yes, No>` ï¿½ Erstellt dir einen Nutzer *(Ja fï¿½r automatische ï¿½bersetzung)*\r\n"
+								+ "`!premium` ï¿½ Zeigt dir alle Premiumfunktionen fï¿½r den Bot \r\n"
+								+ "`!join <Nachricht (@user + @server)` ï¿½ Setzt deine Custom Join Nachricht *only Premium*"
 								, false);
 						
-						embedBuilder.addField(":flag_white: Sprachen Kommandos:", "`!language` » Zeigt dir deine aktuelle Sprache\r\n"
-								+ "`!language list` » Zeigt dir alle verfügbaren Sprachen\r\n"
+						embedBuilder.addField(":flag_white: Sprachen Kommandos:", "`!language` ï¿½ Zeigt dir deine aktuelle Sprache\r\n"
+								+ "`!language list` ï¿½ Zeigt dir alle verfï¿½gbaren Sprachen\r\n"
 								+ "die zur Auswahl stehen\r\n"
-								+ "`!language <Sprache>` » Ändert deine Sprache", false);
+								+ "`!language <Sprache>` ï¿½ ï¿½ndert deine Sprache", false);
 						
-						embedBuilder.addField(":loud_sound: Allgemeine Kommandos: ", "`!start` » Fügt dich zu der Warteschlange hinzu\r\n"
-								+ "`!next` » Verbindet dich mit einem neuem Benutzer *(An deinen \r\n"
+						embedBuilder.addField(":loud_sound: Allgemeine Kommandos: ", "`!start` ï¿½ Fï¿½gt dich zu der Warteschlange hinzu\r\n"
+								+ "`!next` ï¿½ Verbindet dich mit einem neuem Benutzer *(An deinen \r\n"
 								+ "Einstellungen angepasst.)*\r\n"
-								+ "`!report <Nachricht...>` » Meldet einen Nutzer\r\n", false);
+								+ "`!report <Nachricht...>` ï¿½ Meldet einen Nutzer\r\n", false);
 						
 						embedBuilder.setFooter(Main.footer);
 						embedBuilder.setTimestamp(new Date().toInstant());
@@ -101,8 +101,8 @@ public class HelpCommand extends ListenerAdapter{
 						textChannel.sendMessage(":white_check_mark: **|** Du hast eine Direktnachricht erhalten!").complete().delete().queueAfter(5, TimeUnit.SECONDS);
 						
 						user.openPrivateChannel().queue((privatechannel) -> {
-							privatechannel.sendMessage(embedBuilder.build()).queue(null, failed -> {
-								textChannel.sendMessage(embedBuilder.build()).queue();
+							privatechannel.sendMessageEmbeds(embedBuilder.build()).queue(null, failed -> {
+								textChannel.sendMessageEmbeds(embedBuilder.build()).queue();
 							});
 						});
 					}

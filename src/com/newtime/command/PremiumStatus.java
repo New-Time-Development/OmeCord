@@ -76,7 +76,7 @@ public class PremiumStatus extends ListenerAdapter{
 								long end = getEnding.getLong("end");
 								
 								if(end  == 0) {
-										ch.sendMessage(new EmbedBuilder()
+									ch.sendMessageEmbeds(new EmbedBuilder()
 												.setTitle("Premium Status")
 												.setDescription(Translations.premiumStatus(lan, "endlos", premium))
 												.setThumbnail("https://cdn.discordapp.com/attachments/840976542300372992/845307912750759966/455f8be75219_2018px-Red_star.svg.png")
@@ -87,7 +87,7 @@ public class PremiumStatus extends ListenerAdapter{
 					          	  		
 						          	    SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm | dd/MM/yyyy"); 
 						          	     String formattedDate = sdf.format(time);
-						          	   ch.sendMessage(new EmbedBuilder()
+						          	   ch.sendMessageEmbeds(new EmbedBuilder()
 												.setTitle("Premium Status")
 												.setDescription(Translations.premiumStatus(lan, formattedDate, premium))
 												.setThumbnail("https://cdn.discordapp.com/attachments/840976542300372992/845307912750759966/455f8be75219_2018px-Red_star.svg.png")
@@ -101,7 +101,7 @@ public class PremiumStatus extends ListenerAdapter{
 						}
 
 					}else {
-						ch.sendMessage(new EmbedBuilder()
+						ch.sendMessageEmbeds(new EmbedBuilder()
 								.setTitle("Premium Status")
 								.setDescription(Translations.premiumStatus(lan, "endlos", premium))
 								.setThumbnail("https://cdn.discordapp.com/attachments/840976542300372992/845307912750759966/455f8be75219_2018px-Red_star.svg.png")

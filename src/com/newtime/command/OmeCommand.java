@@ -83,7 +83,7 @@ public class OmeCommand extends ListenerAdapter{
 										long endFree = unix + days;
 										LiteSQL.onUpdate("INSERT INTO premium(userid, time, code, end) VALUES(" + m.getIdLong() + ", " + System.currentTimeMillis() + ", 'NewUser', " + endFree + ")");
 										
-										Main.jda.getTextChannelById(845346722691678278l).sendMessage(new EmbedBuilder()
+										Main.jda.getTextChannelById(845346722691678278l).sendMessageEmbeds(new EmbedBuilder()
 					          	  				.setTitle("Codeaktivierung Ome.tv")
 					          	  				.setDescription("Der User " + m.getAsMention() + "** / ** " + m.getUser().getAsTag() + "** ist neu und hat 3 Tage gratis premium!")
 					          	  				.setColor(Color.GREEN)
@@ -113,7 +113,7 @@ public class OmeCommand extends ListenerAdapter{
 							if(trans == 1) {
 								 isActive = true;
 							}
-							ch.sendMessage(new EmbedBuilder()
+							ch.sendMessageEmbeds(new EmbedBuilder()
 									.setTitle("Settings")
 									.setColor(Color.BLUE)
 									.setDescription("Gender: " + gen + "\n Language: " + language + "\n Translations: " + (isActive ? "No" : "Yes"))
