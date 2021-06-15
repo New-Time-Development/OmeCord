@@ -36,6 +36,7 @@ import com.newtime.command.slash.DevSlashCommand;
 import com.newtime.command.slash.EftronSlashCommand;
 import com.newtime.command.slash.HelpShlashCommand;
 import com.newtime.command.slash.InviteSlashCommand;
+import com.newtime.command.slash.JoinSlashCommand;
 import com.newtime.command.slash.LanguageSlashCommand;
 import com.newtime.command.slash.NextSlashCommand;
 import com.newtime.command.slash.OmeSlashCommand;
@@ -97,7 +98,7 @@ public class Main {
 	public static JDA jda;
 	public static JDABuilder builder;
 	public static ArrayList<Long> OwnerIds = new ArrayList<Long>();
-	public static String prefix = "!";
+	public static String prefix = "!!";
 	public static long id = 838062574963523644l;
 	public static String footer = "Version 1.1.0 PRE || New-Time-Development";
 	public static boolean Debug = false;
@@ -123,7 +124,7 @@ public class Main {
     	Logger.getLogger(OkHttpClient.class.getName()).setLevel(java.util.logging.Level.FINE);
     	
     	//Set Token
-		builder = JDABuilder.createDefault(DONOTOPEN.Token);
+		builder = JDABuilder.createDefault(DONOTOPEN.DevToken);
 
 		//Set Online Stats
 		builder.setActivity(Activity.listening("...loading..."));
@@ -195,6 +196,7 @@ public class Main {
 		builder.addEventListeners(new DevSlashCommand());
 		builder.addEventListeners(new PingSlashCommand());
 		builder.addEventListeners(new LanguageSlashCommand());
+		builder.addEventListeners(new JoinSlashCommand());
 		
     	//Buttons
 		builder.addEventListeners(new ShutdownButton());
@@ -233,7 +235,7 @@ public class Main {
 	    //Add Slash Commands
 	    clua.addCommands(new CommandData("about", "Information about the bot & contact")).queue();
 	    clua.addCommands(new CommandData("setup", "Sets up the bot automatically"));
-	    clua.addCommands(new CommandData("join", "Sets your custom join message || only Premium").addOption(OptionType.STRING, "message", "The custom jojn message", true));
+	    clua.addCommands(new CommandData("join", "Sets your custom join message || only Premium").addOption(OptionType.STRING, "color", "Your custom join embed color").addOption(OptionType.STRING, "message", "The custom jojn message", true));
 	    clua.addCommands(new CommandData("next", "Connects you to a new user"));
 	    clua.addCommands(new CommandData("start", " Adds you to the queue"));
 	    clua.addCommands(new CommandData("ping", "Show you the bot ping"));
