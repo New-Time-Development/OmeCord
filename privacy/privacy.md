@@ -5,7 +5,7 @@ You can talk and write with users from all over the world.
 
 ## Data colletion
 Data such as server, user, channel, etc. IDs created by Discord are automatically stored in our database when you use the bot. 
-We do not use any other data like IP addresses or similar. No audio or chat history is collected. We are not responsible for what other users record and how they use it. IT IS EXPRESSLY PROHIBITED TO RECORD(see ToS).
+We do not use any other data like IP addresses or similar. No audio data will be stored. Chat or file histroy can be stored up to 3 Days on our databaseWe are not responsible for what other users record and how they use it. IT IS EXPRESSLY PROHIBITED TO RECORD(see ToS).
 
 ## Data usage
 We use your data to customize your bot experience. 
