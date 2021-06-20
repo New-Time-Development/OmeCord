@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.newtime.command.VoteCommand;
 import com.newtime.listener.OnOmeChannelJoin;
 import com.newtime.main.Main;
 
@@ -49,6 +50,8 @@ public class ChangeCommand extends ListenerAdapter{
 			public void run() {
 				
 				List<String> StatusList = Arrays.asList("a race", "Updates", "to " +  jda.getUsers().size() + " voices", "games with " + OnOmeChannelJoin.activeGuilds.size() + " active users", "movies on " + jda.getGuilds().size() + " guilds", "!help","on twitch");
+				
+				VoteCommand.setServer(jda.getGuilds().size());
 				
 			   int randomInt = r.nextInt(StatusList.size());
 			   String RandomStaus = StatusList.get(randomInt);
