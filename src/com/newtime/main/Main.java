@@ -235,7 +235,7 @@ public class Main {
 	    //Add Slash Commands
 	    clua.addCommands(new CommandData("about", "Information about the bot & contact")).queue();
 	    clua.addCommands(new CommandData("setup", "Sets up the bot automatically"));
-	    clua.addCommands(new CommandData("join", "Sets your custom join message || only Premium").addOption(OptionType.STRING, "color", "Your custom join embed color").addOption(OptionType.STRING, "message", "The custom jojn message", true));
+	    clua.addCommands(new CommandData("join", "Sets your custom join message || only Premium").addOption(OptionType.STRING, "color", "Your custom join embed color", true).addOption(OptionType.STRING, "message", "The custom jojn message", true));
 	    clua.addCommands(new CommandData("next", "Connects you to a new user"));
 	    clua.addCommands(new CommandData("start", " Adds you to the queue"));
 	    clua.addCommands(new CommandData("ping", "Show you the bot ping"));
