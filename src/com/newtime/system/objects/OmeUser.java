@@ -2,6 +2,7 @@ package com.newtime.system.objects;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.User;
 
 /**
  * @author SageSphinx63920
@@ -12,16 +13,26 @@ import net.dv8tion.jda.api.entities.Member;
 public class OmeUser {
 	
 	private Guild guild;
-	private Member member;
+	private User user;
 	private String language;
 	private String gender;
+	private Member member;
 	
-	public OmeUser(Guild guild, Member member, String language, String gender) {
+	public OmeUser(Guild guild, User member, String language, String gender) {
 		
 		this.guild = guild;
-		this.member = member;
+		this.user = member;
 		this.language = language;
 		this.gender = gender;
+		this.member = guild.getMember(member);
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public Guild getGuild() {
@@ -32,12 +43,12 @@ public class OmeUser {
 		this.guild = guild;
 	}
 
-	public Member getMember() {
-		return member;
+	public User getUser() {
+		return user;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setUser(User member) {
+		this.user = member;
 	}
 
 	public String getLanguage() {
