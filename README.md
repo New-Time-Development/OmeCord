@@ -18,7 +18,7 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
     - Here, too, we have various security systems that filter the chat.
   - Our systems are globally synchronised across all systems.
   - In the future, perhaps a gaming module.  
-  
+  - Upcoming, click [here](https://github.com/New-Time-Development/OmeCord/blob/main/Todo.md)
 ## Premium Benefits
   - Prioritised support
   - Also better audio quality(The best audio quality the server can use)
