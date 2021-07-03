@@ -23,8 +23,10 @@ import com.newtime.command.ReportCommand;
 import com.newtime.command.SettingsCommand;
 import com.newtime.command.Setup;
 import com.newtime.command.StartCommand;
+import com.newtime.command.VoteCommand;
 import com.newtime.command.devs.ChangeCommand;
 import com.newtime.command.devs.CodeGen;
+import com.newtime.command.devs.EmbedCommand;
 import com.newtime.command.devs.Mute;
 import com.newtime.command.devs.OnlineCommand;
 import com.newtime.command.devs.PremiumButtonCommand;
@@ -61,6 +63,7 @@ import com.newtime.listener.buttons.PremiumButton;
 import com.newtime.listener.buttons.SettingsButton;
 import com.newtime.listener.buttons.ShutdownButton;
 import com.newtime.listener.buttons.StopButton;
+import com.newtime.listener.buttons.VoteButton;
 import com.newtime.logger.Logs;
 import com.newtime.system.ChattingListener;
 import com.newtime.system.UpdateStatusEmbed;
@@ -70,6 +73,7 @@ import com.newtime.system.security.ChannelDeleteDatabase;
 import com.newtime.system.security.GuildLeave;
 import com.newtime.system.security.OmeChannelDelete;
 import com.newtime.system.security.UserJoin;
+import com.newtime.util.TopGG;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -100,7 +104,7 @@ public class Main {
 	public static ArrayList<Long> OwnerIds = new ArrayList<Long>();
 	public static String prefix = "!!";
 	public static long id = 838062574963523644l;
-	public static String footer = "Version 1.1.0 PRE || New-Time-Development";
+	public static String footer = "Version 1.1.5 PRE || New-Time-Development";
 	public static boolean Debug = false;
 	
 	public static void main(String[] args) throws IOException{
@@ -124,7 +128,7 @@ public class Main {
     	Logger.getLogger(OkHttpClient.class.getName()).setLevel(java.util.logging.Level.FINE);
     	
     	//Set Token
-		builder = JDABuilder.createDefault(DONOTOPEN.DevToken);
+		builder = JDABuilder.createDefault(Tokens.DevToken);
 
 		//Set Online Stats
 		builder.setActivity(Activity.listening("...loading..."));
@@ -170,6 +174,8 @@ public class Main {
 		builder.addEventListeners(new PremiumButtonCommand());
 		builder.addEventListeners(new SettingsCommand());
 		builder.addEventListeners(new GithubListener());
+		builder.addEventListeners(new EmbedCommand());
+		builder.addEventListeners(new VoteCommand());
 		
 		//Securety
 		builder.addEventListeners(new ChannelDeleteDatabase());
@@ -206,6 +212,7 @@ public class Main {
 		builder.addEventListeners(new SettingsButton());
 		builder.addEventListeners(new PremiumButton());
 		builder.addEventListeners(new BetaButton());
+		builder.addEventListeners(new VoteButton());
 		
 	    //Set Owners
 	    OwnerIds.add(401059500972441600l);
@@ -233,6 +240,7 @@ public class Main {
 	    
 	    
 	    //Add Slash Commands
+	    clua.addCommands(new CommandData("vote", "Show informations about the top.gg page").addOptions(new OptionData(OptionType.STRING, "command", "Checks if you have voted!", false).addChoice("check", "check").addChoice("list", "list")));
 	    clua.addCommands(new CommandData("about", "Information about the bot & contact")).queue();
 	    clua.addCommands(new CommandData("setup", "Sets up the bot automatically"));
 	    clua.addCommands(new CommandData("join", "Sets your custom join message || only Premium").addOption(OptionType.STRING, "color", "Your custom join embed color", true).addOption(OptionType.STRING, "message", "The custom jojn message", true));
@@ -256,8 +264,8 @@ public class Main {
 		//Open voice channel connections and starts the functions
 	    start();
 	    
-	    //Start message update
-	  
+	    //Load Top.gg api
+	    TopGG.loadAPI(false);
 	    
 	    Logs.createFiles();
 	   // Scanners.scanners();
