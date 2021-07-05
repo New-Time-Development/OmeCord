@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 import com.newtime.beta.Join;
+import com.newtime.beta.SendmENU;
 import com.newtime.beta.Test1Comman;
 import com.newtime.beta.TestCommand;
 import com.newtime.command.AboutCommand;
@@ -49,6 +50,7 @@ import com.newtime.command.slash.ReportSlashCommand;
 import com.newtime.command.slash.SettingsSlashCommand;
 import com.newtime.command.slash.SetupSlashCommand;
 import com.newtime.command.slash.StartSlashCommand;
+import com.newtime.command.slash.VoteSlashCommand;
 import com.newtime.database.LiteSQL;
 import com.newtime.database.SQLManger;
 import com.newtime.listener.AutoJoinRole;
@@ -62,8 +64,9 @@ import com.newtime.listener.buttons.NextButton;
 import com.newtime.listener.buttons.PremiumButton;
 import com.newtime.listener.buttons.SettingsButton;
 import com.newtime.listener.buttons.ShutdownButton;
-import com.newtime.listener.buttons.StopButton;
+import com.newtime.listener.buttons.StartStopButton;
 import com.newtime.listener.buttons.VoteButton;
+import com.newtime.listener.menus.ToSListener;
 import com.newtime.logger.Logs;
 import com.newtime.system.ChattingListener;
 import com.newtime.system.UpdateStatusEmbed;
@@ -104,7 +107,7 @@ public class Main {
 	public static ArrayList<Long> OwnerIds = new ArrayList<Long>();
 	public static String prefix = "!!";
 	public static long id = 838062574963523644l;
-	public static String footer = "Version 1.1.5 PRE || New-Time-Development";
+	public static String footer = "Version 1.0 || New-Time-Development";
 	public static boolean Debug = false;
 	
 	public static void main(String[] args) throws IOException{
@@ -149,7 +152,6 @@ public class Main {
 	    builder.addEventListeners(new Test1Comman());
 	    builder.addEventListeners(new StartUp());
 	    builder.addEventListeners(new CodeGen());
-	  //  builder.addEventListeners(new VoiceStatsUpdate());
 	    builder.addEventListeners(new ReportCommand());
 	    builder.addEventListeners(new Setup());
 	    builder.addEventListeners(new OnOmeChannelJoin());
@@ -203,16 +205,20 @@ public class Main {
 		builder.addEventListeners(new PingSlashCommand());
 		builder.addEventListeners(new LanguageSlashCommand());
 		builder.addEventListeners(new JoinSlashCommand());
+		builder.addEventListeners(new VoteSlashCommand());
 		
     	//Buttons
 		builder.addEventListeners(new ShutdownButton());
 		builder.addEventListeners(new NextButton());
-		builder.addEventListeners(new StopButton());
+		builder.addEventListeners(new StartStopButton());
 		builder.addEventListeners(new EchoTestButton());
 		builder.addEventListeners(new SettingsButton());
 		builder.addEventListeners(new PremiumButton());
 		builder.addEventListeners(new BetaButton());
 		builder.addEventListeners(new VoteButton());
+		
+		//Menus
+		builder.addEventListeners(new ToSListener());
 		
 	    //Set Owners
 	    OwnerIds.add(401059500972441600l);
@@ -220,7 +226,7 @@ public class Main {
 	    
 	   //Only Debug Commands
 	    if(Debug) {
-	    	
+	    	builder.addEventListeners(new SendmENU());
 	    }
 
 	    
