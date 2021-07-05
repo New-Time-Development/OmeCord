@@ -4,25 +4,30 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import com.newtime.database.LiteSQL;
 import com.newtime.main.Main;
 import com.newtime.util.Translations;
+import com.newtime.listener.menus.*;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.selections.SelectionMenu;
 
 public class OmeCommand extends ListenerAdapter{
 	
 	private List<String> langs = Arrays.asList("de", "en", "trk", "fr", "es", "ru");
 	private List<String> gender = Arrays.asList("male", "female", "couples");
+	public static HashMap<Long, Long> messages = new HashMap<>();
 	
 	@SuppressWarnings("unused")
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
@@ -78,20 +83,41 @@ public class OmeCommand extends ListenerAdapter{
 										LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1].toLowerCase() +"', '" + args[2].toLowerCase() + "', '" + args[3].toLowerCase() + "', " + mute + ")");
 										ch.sendMessage(Translations.OmeCmd(lan, "update")).queue();
 									}else {
-										int days = 259200000;
-										long unix = System.currentTimeMillis();
-										long endFree = unix + days;
-										LiteSQL.onUpdate("INSERT INTO premium(userid, time, code, end) VALUES(" + m.getIdLong() + ", " + System.currentTimeMillis() + ", 'NewUser', " + endFree + ")");
+										if(ToSListener.accepted.containsKey(m.getIdLong())) {
+											int days = 259200000;
+											long unix = System.currentTimeMillis();
+											long endFree = unix + days;
+											LiteSQL.onUpdate("INSERT INTO premium(userid, time, code, end) VALUES(" + m.getIdLong() + ", " + System.currentTimeMillis() + ", 'NewUser', " + endFree + ")");
+											
+											Main.jda.getTextChannelById(845346722691678278l).sendMessageEmbeds(new EmbedBuilder()
+						          	  				.setTitle("Codeaktivierung Ome.tv")
+						          	  				.setDescription("Der User " + m.getAsMention() + " / ** " + m.getUser().getAsTag() + "** ist neu und hat 3 Tage gratis premium!")
+						          	  				.setColor(Color.GREEN)
+						          	  				.setFooter("Codeaktivierung")
+						          	  				.build()).queue();
+											
+											LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1].toLowerCase() +"', '" + args[2].toLowerCase() + "', '" + args[3].toLowerCase() + "', 0)");
+											ch.sendMessage(Translations.OmeCmd(lan, "insert")).queue();
+										}else {
+											SelectionMenu menu = SelectionMenu.create("tos:menu")
+													.setRequiredRange(1, 1)
+												    .addOption("Yes", "yes", "I read and apply the ToS and Privacy", Emoji.fromMarkdown("<:check_mark:845331036737241120>"))
+												    .addOption("No", "no", "I dont apply the ToS/Privacy(You cant use the bot)", Emoji.fromMarkdown("<:error123:845331037138976809>"))
+													//.setDefaultOptions(Arrays.asList(SelectOption.of("Yes", "yes")))
+												    .setPlaceholder("Do you accept it?")
+												    .build();
+											
+											ch.sendMessageEmbeds(new EmbedBuilder()
+													.setTitle("ToS and Privacy")
+													.setDescription("I read and accept the [ToS](https://github.com/New-Time-Development/OmeCord/blob/docs/tos/terms.md) and [Privacy](https://github.com/New-Time-Development/OmeCord/blob/docs/privacy/privacy.md)!")
+													.setColor(Color.ORANGE)
+													.build()).setActionRow(menu).queue(tosmes->{
+														messages.put(m.getIdLong(), tosmes.getIdLong());
+													});
+											
+										}
+
 										
-										Main.jda.getTextChannelById(845346722691678278l).sendMessageEmbeds(new EmbedBuilder()
-					          	  				.setTitle("Codeaktivierung Ome.tv")
-					          	  				.setDescription("Der User " + m.getAsMention() + "** / ** " + m.getUser().getAsTag() + "** ist neu und hat 3 Tage gratis premium!")
-					          	  				.setColor(Color.GREEN)
-					          	  				.setFooter("Codeaktivierung")
-					          	  				.build()).queue();
-										
-										LiteSQL.onUpdate("INSERT INTO members(userid, selcLan, gen, ueber, mute) VALUES(" + m.getIdLong() + ", '" + args[1].toLowerCase() +"', '" + args[2].toLowerCase() + "', '" + args[3].toLowerCase() + "', 0)");
-										ch.sendMessage(Translations.OmeCmd(lan, "insert")).queue();
 									}
 								} catch (SQLException e) {
 									// TODO Auto-generated catch block
