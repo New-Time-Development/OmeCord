@@ -15,8 +15,7 @@ We have already blocked various executable file types, but we cannot guarantee a
 
 ## Usage rules 
 
-Any user using the bot may not record audio or private video and may not send it to other users without the express permission of the connected user. In case of violation it can lead to blocking of the account!
-Usage rules 
+Any user using the bot shoud not record audio or private video and dont send it to other users without the express permission of the connected user. In case of violation it can lead to blocking of the account!
 
 ## Account blocking
 
