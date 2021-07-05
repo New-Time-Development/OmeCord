@@ -18,23 +18,28 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
     - Here, too, we have various security systems that filter the chat.
   - Our systems are globally synchronised across all systems.
   - In the future, perhaps a gaming module.  
+  - Vote Coins 
+    - With the coins you can get 1 month premium & more for free!
   - Upcoming, click [here](https://github.com/New-Time-Development/OmeCord/blob/main/Todo.md)
 ## Premium Benefits
   - Prioritised support
   - Also better audio quality(The best audio quality the server can use)
   - More file upload (Up to 15MB (only possible if you have Nitro))
   - Slow mode is deactivated and no cooldown
-  - Personalised Connection Message
+  - Personalised Connection Message + Color
   - Early access to beta functions
     -  You can get Premium here: [Click here](https://www.patreon.com/omecord/creators)
 
 ## Partners
-  - Our partner is Eftron. This was programmed by the same developers as this bot and Eftron 24/7 is already verified.
+  - Our partner is Eftron. This was programmed by the same developers as this bot and Eftron 24/7 + Eftron are already verified.
 
 ## Our Top.gg
 <a href="https://top.gg/bot/838062574963523644">
   <img src="https://top.gg/api/widget/838062574963523644.svg" alt="OmeCord" />
   </a>
+
+## Support
+If you need any kind of support you can check out our [Discord](https://discord.com/invite/zEwGEJUPRC) or make a [Isseu](https://github.com/New-Time-Development/OmeCord/issues/new/choose) on this github page!
 
 ## Terms of Service and Privacy policy
 In our bot, the [ToS](https://github.com/New-Time-Development/OmeCord/blob/docs/tos/terms.md) and [Privacy](https://github.com/New-Time-Development/OmeCord/blob/docs/privacy/privacy.md) created by us . Every user is must  accept them! (You accept the Terms of Service and the Privacy policy automatically when you use the bot)
