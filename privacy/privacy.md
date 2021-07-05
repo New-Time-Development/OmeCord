@@ -5,14 +5,14 @@ You can talk and write with users from all over the world.
 
 ## Data colletion
 Data such as server, user, channel, etc. IDs created by Discord are automatically stored in our database when you use the bot. 
-We do not use any other data like IP addresses or similar. No audio data will be stored. Chat or file histroy can be stored up to 3 Days on our databaseWe are not responsible for what other users record and how they use it. IT IS EXPRESSLY PROHIBITED TO RECORD(see ToS).
+We do not use any other data like IP addresses or similar. No audio data will be stored. Chat or file histroy can be stored up to 30 Days on our database. We are not responsible for what other users record and how they use it. IT IS EXPRESSLY PROHIBITED TO RECORD(see ToS).
 
 ## Data usage
 We use your data to customize your bot experience. 
 The data you give us in your settings is used for many different things. It is only used and processed in our bot in closed circles. 
 
 ## Location of the collected data
-We are a german programmer and store your data in a database on our server. 
+We are a german programmer and store your data in a database on our server. We are using a [SQLite](https://sqlite.org/index.html) databse to save your date! 
 This is located in the German city of Düsseldorf. 
 
 ## Disclosure of your data
