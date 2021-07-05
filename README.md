@@ -39,10 +39,10 @@ Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
   </a>
 
 ## Support
-If you need any kind of support you can check out our [Discord](https://discord.com/invite/zEwGEJUPRC) or make a [Isseu](https://github.com/New-Time-Development/OmeCord/issues/new/choose) on this github page!
+If you need any kind of support you can check out our [Discord](https://discord.com/invite/zEwGEJUPRC) or make a [Issue](https://github.com/New-Time-Development/OmeCord/issues/new/choose) on this github page!
 
 ## Terms of Service and Privacy policy
-In our bot, the [ToS](https://github.com/New-Time-Development/OmeCord/blob/docs/tos/terms.md) and [Privacy](https://github.com/New-Time-Development/OmeCord/blob/docs/privacy/privacy.md) created by us . Every user is must  accept them! (You accept the Terms of Service and the Privacy policy automatically when you use the bot)
+In our bot, the [ToS](https://github.com/New-Time-Development/OmeCord/blob/docs/tos/terms.md) and [Privacy](https://github.com/New-Time-Development/OmeCord/blob/docs/privacy/privacy.md), created by us, are to be complied with. Every user is must accept them! 
 We reserve the right to change these at any time and if they are not adhered to we have the right to exclude these users.
 
 ## Third Party Licenses
