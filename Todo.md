@@ -6,9 +6,9 @@
   - New infrastructure
 
 ## Functions
-- Vote Command
-- Start/Stop Button
+- Add no binary support
 - Echo Test
+- User accounts
  ### Gaming Module
  #### Internal
  - Objects
