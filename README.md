@@ -3,7 +3,7 @@
 </p>
 
 # [OmeCord || 1.0](https://top.gg/bot/838062574963523644/invite)
-Copyright © 2020 - 2021 by OmeCord to present. All rights reserved
+Copyright © 2020 - 2022 by OmeCord to present. All rights reserved
 
 ## Features
   - This Discordbot has the same features as Ome.tv! You can talk to other
