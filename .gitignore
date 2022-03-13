@@ -11,8 +11,27 @@ local.properties
 .loadpath
 .recommenders
 
+#IntelliJ
+.idea/
+*.iml
+
+
 # External tool builders
 .externalToolBuilders/
+
+#Special Things
+Queue.java
+QueueBackup.java
+QueueWithObjects.java
+
+beta/
+logs/
+
+Tokens.java
+
+#Database
+*.db
+*.sqlite
 
 # Locally stored "Eclipse launch configurations"
 *.launch
